@@ -3,4 +3,7 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="welcome_to_fluxstore">Welcome to Fluxstore </string>
+    <string name="register_screen_text">Lorem Ipsum Dolor Sit Amet Consectetur Adipisicing Elit</string>
+    <string name="second_register_screen_title">Lorconsectetur adipisicing</string>
 </resources>
