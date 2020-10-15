@@ -9,4 +9,9 @@
     <string name="skip">Skip ></string>
     <string name="sign_in">Sign In</string>
     <string name="sign_up">Sign Up</string>
+    <string name="time_remain_zero_days">Remain: %dh:%dm</string>
+    <plurals name="time_remaining">
+        <item quantity="one">Remain: %d day, %dh:%dm</item>
+        <item quantity="other">Remain: %d days, %dh:%dm</item>
+    </plurals>
 </resources>
