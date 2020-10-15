@@ -63,7 +63,7 @@ public class StartInfoActivity extends AppCompatActivity {
                 getString(R.string.second_register_screen_title), getString(R.string.register_screen_text));
         adapter.addFragment(1, secondFragment);
 
-        StartInfoFragment thirdFragment = new StartInfoFragment();
+        StartInfoLastFragment thirdFragment = new StartInfoLastFragment();
         setFragmentBundle(thirdFragment, R.drawable.registration_3,
                 "", getString(R.string.register_screen_text));
         adapter.addFragment(2, thirdFragment);
