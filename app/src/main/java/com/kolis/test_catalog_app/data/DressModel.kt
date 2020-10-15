@@ -1,7 +1,10 @@
 package com.kolis.test_catalog_app.data
 
+import android.os.Parcelable
 import com.kolis.test_catalog_app.R
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class DressModel(
     val id: Int,
     val name: String,
@@ -11,7 +14,7 @@ data class DressModel(
     val overallRating: Long,
     val numberOfVotes: Long,
     val timeTill: Long = 0L
-) {
+) : Parcelable {
 
     companion object {
         val sampleList = arrayListOf(

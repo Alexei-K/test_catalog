@@ -9,17 +9,35 @@
         android:id="@+id/navigation_home"
         android:name="com.kolis.test_catalog_app.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_watch_dress"
+            app:destination="@id/navigation_watch_dress" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_watch_dress"
+        android:name="com.kolis.test_catalog_app.ui.EmptyFragment"
+        tools:layout="@layout/fragment_watch_dress">
+        <argument
+            android:name="model"
+            app:argType="com.kolis.test_catalog_app.data.DressModel" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.kolis.test_catalog_app.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:name="com.kolis.test_catalog_app.ui.EmptyFragment"
+        android:label="@string/title_search"
+        tools:layout="@layout/fragment_empty" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.kolis.test_catalog_app.ui.notifications.NotificationsFragment"
+        android:name="com.kolis.test_catalog_app.ui.EmptyFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_empty" />
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.kolis.test_catalog_app.ui.EmptyFragment"
+        android:label="@string/title_profile"
+        tools:layout="@layout/fragment_empty" />
 </navigation>

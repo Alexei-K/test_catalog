@@ -97,7 +97,9 @@ public class DressListAdapter extends RecyclerView.Adapter<DressListAdapter.Dres
             long votes = model.getNumberOfVotes();
             numberOfVotesTV.setText("(" + (int) votes + ")");
             ratingBar.setRating(model.getAvgMark());
-
+            itemView.setOnClickListener(v -> {
+                HomeFragmentDirections.ActionNavigationHomeToNavigationWatchDress action = HomeFragmentDirections.actionNavigationHomeToNavigationWatchDress(model);
+            });
         }
     }
 
