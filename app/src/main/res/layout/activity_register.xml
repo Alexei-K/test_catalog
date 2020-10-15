@@ -9,11 +9,13 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/register_tabs"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="2dp"
         android:layout_marginBottom="30dp"
+        app:tabBackground="@drawable/tab_color_selector"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:tabIndicatorHeight="0dp"
         app:tabMode="fixed" />
 
     <androidx.viewpager.widget.ViewPager

@@ -8,7 +8,7 @@
     <ImageView
         android:id="@+id/info_image"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="300dp"
         android:layout_marginBottom="86dp"
         app:layout_constraintBottom_toTopOf="@id/title_info"
         app:layout_constraintEnd_toEndOf="parent"
@@ -41,8 +41,8 @@
         android:gravity="center_horizontal"
         android:maxWidth="222dp"
         android:textColor="@color/grey"
-
         android:textSize="16sp"
+        android:layout_marginBottom="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

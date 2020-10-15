@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".RegisterActivity"
+            android:name=".ui.start_info.StartInfoActivity"
             android:label="Login activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
