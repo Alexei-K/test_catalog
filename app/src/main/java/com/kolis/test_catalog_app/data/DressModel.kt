@@ -1,6 +1,7 @@
 package com.kolis.test_catalog_app.data
 
 import android.os.Parcelable
+import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.kolis.test_catalog_app.R
 import kotlinx.android.parcel.Parcelize
 
@@ -31,6 +32,20 @@ data class DressModel(
             DressModel(10, "Scaridian dress", 160.00f, 50.00f, true, 80, 16),
             DressModel(1, "Black dress", 200.00f, 50.00f, false, 40, 40)
         )
+
+        fun fromFirebaseDocument(document: QueryDocumentSnapshot): DressModel {
+
+            return DressModel(
+                (document["id"] as Long).toInt(),
+                document["name"] as String,
+                (document["oldPrice"] as Double).toFloat(),
+                (document["newPrice"] as Double).toFloat(),
+                document["isLiked"] as Boolean,
+                document["overallRating"] as Long,
+                document["numberOfVotes"] as Long,
+                document["timeTill"] as Long
+            )
+        }
     }
 
     fun getAvgMark(): Float = overallRating.toFloat() / numberOfVotes.toFloat()
@@ -45,4 +60,16 @@ data class DressModel(
 
     }
 
+    fun toMap(): Map<String, Any> {
+        return hashMapOf(
+            "id" to id,
+            "name" to name,
+            "oldPrice" to oldPrice,
+            "newPrice" to newPrice,
+            "isLiked" to isLiked,
+            "overallRating" to overallRating,
+            "numberOfVotes" to numberOfVotes,
+            "timeTill" to timeTill
+        )
+    }
 }

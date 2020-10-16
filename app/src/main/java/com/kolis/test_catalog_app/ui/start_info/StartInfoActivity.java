@@ -10,16 +10,18 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.kolis.test_catalog_app.MainActivity;
 import com.kolis.test_catalog_app.R;
+import com.kolis.test_catalog_app.util.PrefConstants;
 
 import static androidx.fragment.app.FragmentPagerAdapter.BEHAVIOR_SET_USER_VISIBLE_HINT;
 
 public class StartInfoActivity extends AppCompatActivity {
-    public static String IS_LOGGED_PREF = "is_logged_in_app";
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -80,8 +82,8 @@ public class StartInfoActivity extends AppCompatActivity {
     }
 
     private void checkRegistration() {
-        SharedPreferences pref = getPreferences(Context.MODE_PRIVATE);
-        if (pref.getBoolean(IS_LOGGED_PREF, false)) {
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+        if (pref.getBoolean(PrefConstants.IS_LOGGED_PREF, false)) {
             startActivity(new Intent(this, MainActivity.class));
             finish();
         }

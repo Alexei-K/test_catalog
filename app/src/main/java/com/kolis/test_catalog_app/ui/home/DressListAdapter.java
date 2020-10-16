@@ -18,7 +18,7 @@ import com.kolis.test_catalog_app.data.DressModel;
 import java.util.ArrayList;
 
 public class DressListAdapter extends RecyclerView.Adapter<DressListAdapter.DressViewHolder> {
-    private ArrayList<DressModel> dressList;
+    private ArrayList<DressModel> dressList = new ArrayList<>();
 
     @NonNull
     @Override
@@ -38,7 +38,7 @@ public class DressListAdapter extends RecyclerView.Adapter<DressListAdapter.Dres
 
     public void setModelsList(ArrayList<DressModel> modelList) {
         dressList = modelList;
-
+        notifyDataSetChanged();
     }
 
     class DressViewHolder extends RecyclerView.ViewHolder {
