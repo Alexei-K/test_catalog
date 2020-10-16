@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.navigation.NavController;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kolis.test_catalog_app.R;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 
 public class DressListAdapter extends RecyclerView.Adapter<DressListAdapter.DressViewHolder> {
     private ArrayList<DressModel> dressList = new ArrayList<>();
+    public NavController controller;
 
     @NonNull
     @Override
@@ -99,6 +101,7 @@ public class DressListAdapter extends RecyclerView.Adapter<DressListAdapter.Dres
             ratingBar.setRating(model.getAvgMark());
             itemView.setOnClickListener(v -> {
                 HomeFragmentDirections.ActionNavigationHomeToNavigationWatchDress action = HomeFragmentDirections.actionNavigationHomeToNavigationWatchDress(model);
+                controller.navigate(action);
             });
         }
     }

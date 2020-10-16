@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/navigation_watch_dress"
-        android:name="com.kolis.test_catalog_app.ui.EmptyFragment"
+        android:name="com.kolis.test_catalog_app.ui.home.dressWatch.WatchDressFragment"
         tools:layout="@layout/fragment_watch_dress">
         <argument
             android:name="model"
