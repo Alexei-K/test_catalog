@@ -8,6 +8,7 @@
     <color name="dark">#1D1F22</color>
     <color name="grey">#676767</color>
     <color name="grey_price">#BEBFC4</color>
+    <color name="white">#FFFFFF</color>
     <color name="light_grey">#A0A0A0</color>
     <color name="unselected_tab">#D6D6D6</color>
     <color name="greenPrimary">#5ECE7B</color>

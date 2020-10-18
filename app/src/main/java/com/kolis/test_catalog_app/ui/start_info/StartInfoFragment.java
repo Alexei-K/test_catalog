@@ -22,7 +22,6 @@ public class StartInfoFragment extends Fragment {
     public static final String INFO_TITLE = "info title";
     public static final String INFO_TEXT = "info text";
 
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         viewModel = new ViewModelProvider(this).get(StartInfoViewModel.class);

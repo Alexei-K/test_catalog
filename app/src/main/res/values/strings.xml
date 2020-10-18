@@ -24,9 +24,27 @@
 
     <string name="leave_profile">Leave profile</string>
 
+    <!--    watch dress card-->
+    <string name="add_to_cart">ADD TO CART</string>
+    <string name="size">Size</string>
+    <string name="color">Color</string>
+    <string name="description">Description</string>
+    <string name="product_code">Product Code: %s</string>
+    <string name="category">Category: %s</string>
+    <string name="material">Material: %s</string>
+    <string name="country">Country: %s</string>
+
 
     <plurals name="time_remaining">
         <item quantity="one">Remain: %d day, %dh:%dm</item>
         <item quantity="other">Remain: %d days, %dh:%dm</item>
     </plurals>
+
+    <string-array name="numberOfItems">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
 </resources>

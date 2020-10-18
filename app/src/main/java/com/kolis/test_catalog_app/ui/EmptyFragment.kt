@@ -15,7 +15,6 @@ class EmptyFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_empty, container, false)
-        return root
+        return inflater.inflate(R.layout.fragment_empty, container, false)
     }
 }

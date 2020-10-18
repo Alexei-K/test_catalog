@@ -25,16 +25,20 @@ data class DressModel(
 ) : Parcelable {
 
     companion object {
-        val sampleDesription: String =
+        const val sampleDesription: String =
             "The Karissa V-Neck Tee features a semi-fitted shape that's " +
                     "flattering for every figure. You can hit the gym with confidence while it hugs curves and " +
                     "hides common \"problem\" areas. Find stunning women's cocktail dresses and party dresses."
-        val sampleColors = listOf<Pair<String, String>>(
+        private val sampleColors = listOf(
             Pair("Grey", "676767"),
             Pair("Black", "000000"),
             Pair("Red", "EB5757"),
             Pair("Green", "5ECE7B")
         )
+
+        /**
+         * Sample data used to upload it on server or local testing
+         */
         val sampleList = arrayListOf(
             DressModel(
                 0, "Scaridian dress", 100.00f, 50.00f, false, 80, 83, 1602798596177,
@@ -98,7 +102,7 @@ data class DressModel(
             )
         )
 
-        val ID_CODE: String = "id"
+        const val ID_CODE: String = "id"
         val NAME_CODE: String = "name"
         val OLD_PRICE_CODE: String = "oldPrice"
         val NEW_PRICE_CODE: String = "newPrice"
@@ -115,7 +119,6 @@ data class DressModel(
         val COUNTRY_CODE: String = "country"
 
         fun fromFirebaseDocument(document: QueryDocumentSnapshot): DressModel {
-
             return DressModel(
                 (document[ID_CODE] as Long).toInt(),
                 document[NAME_CODE] as String,
@@ -146,6 +149,8 @@ data class DressModel(
     }
 
     fun getAvgMark(): Float = overallRating.toFloat() / numberOfVotes.toFloat()
+
+    // For testing purpose
     fun getTestImageResource(): Int {
         return when (id % 4) {
             0 -> R.drawable.image_test
@@ -157,7 +162,9 @@ data class DressModel(
 
     }
 
-    // mapper for Firebase Cloud Firestore
+    /**
+     *Mapper for Firebase Cloud Firestore
+     */
     fun toMap(): Map<String, Any> {
         return hashMapOf(
             ID_CODE to id,

@@ -21,6 +21,11 @@ class ProfileFragment : Fragment() {
     ): View? {
         viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_profile, container, false)
+        setLeaveProfile(root)
+        return root
+    }
+
+    private fun setLeaveProfile(root: View) {
         val pref = PreferenceManager.getDefaultSharedPreferences(context)
         if (pref.getBoolean(PrefConstants.IS_LOGGED_PREF, false)) {
             root.leaveProfile.setOnClickListener {
@@ -28,6 +33,5 @@ class ProfileFragment : Fragment() {
             }
             root.leaveProfile.visibility = View.VISIBLE
         }
-        return root
     }
 }

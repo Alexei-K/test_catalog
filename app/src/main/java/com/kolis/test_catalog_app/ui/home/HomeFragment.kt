@@ -9,13 +9,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.kolis.test_catalog_app.R
-import com.kolis.test_catalog_app.data.DressModel
 import com.kolis.test_catalog_app.data.DressRepositoryImpl
 import kotlinx.android.synthetic.main.fragment_home.view.*
 
 class HomeFragment : Fragment() {
     private lateinit var homeViewModel: HomeViewModel
-    val adapter = DressListAdapter()
+    private val adapter = DressListAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,9 +23,8 @@ class HomeFragment : Fragment() {
     ): View? {
         homeViewModel =
             ViewModelProviders.of(this).get(HomeViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
 
-        return root
+        return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

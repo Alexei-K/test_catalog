@@ -27,29 +27,11 @@ public class StartInfoActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         checkRegistration();
-
         setContentView(R.layout.activity_register);
         ViewPager pager = findViewById(R.id.register_viewPager);
         TabLayout tabs = findViewById(R.id.register_tabs);
         setUpAdapter(pager);
         tabs.setupWithViewPager(pager);
-
-//        Button registerButton = findViewById(R.id.registerButton);
-//        Button unregisterButton = findViewById(R.id.unregisterButton);
-//        registerButton.setOnClickListener(v -> {
-//            SharedPreferences pref = getPreferences(Context.MODE_PRIVATE);
-//            if (!pref.getBoolean(IS_LOGGED_PREF, false)) {
-//                pref.edit().putBoolean(IS_LOGGED_PREF, true).apply();
-//            } else {
-//                startActivity(new Intent(this, MainActivity.class));
-//                finish();
-//            }
-//        });
-//
-//        unregisterButton.setOnClickListener(v -> {
-//            SharedPreferences pref = getPreferences(Context.MODE_PRIVATE);
-//                pref.edit().putBoolean(IS_LOGGED_PREF, false).apply();
-//        });
     }
 
     private void setUpAdapter(ViewPager pager) {
@@ -89,7 +71,6 @@ public class StartInfoActivity extends AppCompatActivity {
         }
 
     }
-
 
     @Nullable
     @Override
