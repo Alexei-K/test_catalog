@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.kolis.test_catalog_app.R;
 import com.kolis.test_catalog_app.data.DressModel;
+import com.kolis.test_catalog_app.data.DressRepositoryImpl;
 
 import java.util.ArrayList;
 
@@ -68,7 +69,7 @@ public class DressListAdapter extends RecyclerView.Adapter<DressListAdapter.Dres
 
         public void bind(DressModel model) {
 
-            //заглушка
+            //заглушка. Фото не отправляется на сервер и не получается с сервера.
             pictureIV.setImageDrawable(ResourcesCompat.getDrawable(itemView.getResources(),
                     model.getTestImageResource(), null));
             isLikedIV.setImageDrawable(ResourcesCompat.getDrawable(itemView.getResources(),

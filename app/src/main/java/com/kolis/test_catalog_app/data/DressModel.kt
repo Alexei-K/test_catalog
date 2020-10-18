@@ -14,37 +14,134 @@ data class DressModel(
     var isLiked: Boolean = false,
     val overallRating: Long,
     val numberOfVotes: Long,
-    val timeTill: Long = 0L
+    val timeTill: Long = 0L,
+    val sizes: List<String>,
+    val colors: List<Pair<String, String>>,
+    val description: String,
+    val productCode: String,
+    val category: String,
+    val material: String,
+    val country: String
 ) : Parcelable {
 
     companion object {
-        val sampleList = arrayListOf(
-            DressModel(0, "Scaridian dress", 100.00f, 50.00f, false, 80, 83, 1602798596177),
-            DressModel(1, "Wool dress", 200.00f, 180.00f, false, 100, 12, 1602885996177),
-            DressModel(2, "Cream cotton dress", 150.00f, 100.00f, true, 120, 28, 1602962396177),
-            DressModel(3, "Black dress", 120.00f, 120.00f, true, 2, 1),
-            DressModel(4, "Scaridian dress", 120.00f, 50.00f, false, 40, 24),
-            DressModel(5, "Black dress", 1000.00f, 250.00f, true, 45, 12),
-            DressModel(6, "Scaridian dress", 20.00f, 20.00f, false, 54, 40, 1609796996177),
-            DressModel(7, "Wool dress", 160.00f, 16.00f, true, 80, 58),
-            DressModel(8, "Scaridian dress", 120.00f, 120.00f, false, 100, 26, 1607890006177),
-            DressModel(9, "Wool dress", 120.00f, 50.00f, true, 120, 40),
-            DressModel(10, "Scaridian dress", 160.00f, 50.00f, true, 80, 16),
-            DressModel(1, "Black dress", 200.00f, 50.00f, false, 40, 40)
+        val sampleDesription: String =
+            "The Karissa V-Neck Tee features a semi-fitted shape that's " +
+                    "flattering for every figure. You can hit the gym with confidence while it hugs curves and " +
+                    "hides common \"problem\" areas. Find stunning women's cocktail dresses and party dresses."
+        val sampleColors = listOf<Pair<String, String>>(
+            Pair("Grey", "676767"),
+            Pair("Black", "000000"),
+            Pair("Red", "EB5757"),
+            Pair("Green", "5ECE7B")
         )
+        val sampleList = arrayListOf(
+            DressModel(
+                0, "Scaridian dress", 100.00f, 50.00f, false, 80, 83, 1602798596177,
+                listOf("small", "medium", "Large", "tiny", "XL", "XXL"), sampleColors,
+                sampleDesription, "578902-00", "Sweater", "Cotton", "Spain"
+            ),
+            DressModel(
+                1, "Wool dress", 200.00f, 180.00f, false, 100, 12, 1602885996177,
+                listOf("small", "medium", "Large", "tiny", "XL", "XXL"), sampleColors,
+                sampleDesription, "578902-00", "Sweater", "Cotton", "China"
+            ),
+            DressModel(
+                2, "Cream cotton dress", 150.00f, 100.00f, true, 120, 28, 1602962396177,
+                listOf("small", "medium", "Large", "tiny", "XL", "XXL"), sampleColors,
+                sampleDesription, "578902-00", "Sweater", "Cotton", "Ukraine"
+            ),
+            DressModel(
+                3, "Black dress", 120.00f, 120.00f, true, 2, 1, 7,
+                listOf("small", "medium", "Large", "tiny", "XL", "XXL"), sampleColors,
+                sampleDesription, "578902-00", "Sweater", "Cotton", "Spain"
+            ),
+            DressModel(
+                4, "Scaridian dress", 120.00f, 50.00f, false, 40, 24, 7,
+                listOf("small", "medium", "Large", "tiny", "XL", "XXL"), sampleColors,
+                sampleDesription, "578902-00", "Sweater", "Cotton", "Spain"
+            ),
+            DressModel(
+                5, "Black dress", 1000.00f, 250.00f, true, 45, 12, 7,
+                listOf("small", "medium", "Large", "tiny", "XL", "XXL"), sampleColors,
+                sampleDesription, "578902-00", "Sweater", "Cotton", "China"
+            ),
+            DressModel(
+                6, "Scaridian dress", 20.00f, 20.00f, false, 54, 40, 1609796996177,
+                listOf("small", "medium", "Large", "tiny", "XL", "XXL"), sampleColors,
+                sampleDesription, "578902-00", "Sweater", "Cotton", "Spain"
+            ),
+            DressModel(
+                7, "Wool dress", 160.00f, 16.00f, true, 80, 58, 7,
+                listOf("small", "medium", "Large", "tiny", "XL", "XXL"), sampleColors,
+                sampleDesription, "578902-00", "Sweater", "Cotton", "China"
+            ),
+            DressModel(
+                8, "Scaridian dress", 120.00f, 120.00f, false, 100, 26, 1607890006177,
+                listOf("small", "medium", "Large", "tiny", "XL", "XXL"), sampleColors,
+                sampleDesription, "578902-00", "Sweater", "Cotton", "Spain"
+            ),
+            DressModel(
+                9, "Wool dress", 120.00f, 50.00f, true, 120, 40, 7,
+                listOf("small", "medium", "Large", "tiny", "XL", "XXL"), sampleColors,
+                sampleDesription, "578902-00", "Sweater", "Cotton", "Spain"
+            ),
+            DressModel(
+                10, "Scaridian dress", 160.00f, 50.00f, true, 80, 16, 7,
+                listOf("small", "medium", "Large", "tiny", "XL", "XXL"), sampleColors,
+                sampleDesription, "578902-00", "Sweater", "Cotton", "Spain"
+            ),
+            DressModel(
+                1, "Black dress", 200.00f, 50.00f, false, 40, 40, 7,
+                listOf("small", "medium", "Large", "tiny", "XL", "XXL"), sampleColors,
+                sampleDesription, "578902-00", "Sweater", "Cotton", "Spain"
+            )
+        )
+
+        val ID_CODE: String = "id"
+        val NAME_CODE: String = "name"
+        val OLD_PRICE_CODE: String = "oldPrice"
+        val NEW_PRICE_CODE: String = "newPrice"
+        var IS_LIKED_CODE: String = "isLiked"
+        val OVERALL_RATING_CODE: String = "overallRating"
+        val NUMBER_OF_VOTES_CODE: String = "numberOfVotes"
+        val TIME_TILL_CODE: String = "timeTill"
+        val SIZE_CODE: String = "sizes"
+        val COLOR_NAME_CODE: String = "colors"
+        val DESCRIPTION_CODE: String = "description"
+        val PRODUCT_CODE_CODE: String = "productCode"
+        val CATEGORY_CODE: String = "category"
+        val MATERIAL_CODE: String = "material"
+        val COUNTRY_CODE: String = "country"
 
         fun fromFirebaseDocument(document: QueryDocumentSnapshot): DressModel {
 
             return DressModel(
-                (document["id"] as Long).toInt(),
-                document["name"] as String,
-                (document["oldPrice"] as Double).toFloat(),
-                (document["newPrice"] as Double).toFloat(),
-                document["isLiked"] as Boolean,
-                document["overallRating"] as Long,
-                document["numberOfVotes"] as Long,
-                document["timeTill"] as Long
+                (document[ID_CODE] as Long).toInt(),
+                document[NAME_CODE] as String,
+                (document[OLD_PRICE_CODE] as Double).toFloat(),
+                (document[NEW_PRICE_CODE] as Double).toFloat(),
+                document[IS_LIKED_CODE] as Boolean,
+                document[OVERALL_RATING_CODE] as Long,
+                document[NUMBER_OF_VOTES_CODE] as Long,
+                document[TIME_TILL_CODE] as Long,
+                document[SIZE_CODE] as ArrayList<String>,
+                getColorsFromFirebaseDocument(document),
+                document[DESCRIPTION_CODE] as String,
+                document[PRODUCT_CODE_CODE] as String,
+                document[CATEGORY_CODE] as String,
+                document[MATERIAL_CODE] as String,
+                document[COUNTRY_CODE] as String
             )
+        }
+
+        private fun getColorsFromFirebaseDocument(document: QueryDocumentSnapshot): MutableList<Pair<String, String>> {
+            val colorsArray = document[COLOR_NAME_CODE] as ArrayList<HashMap<String, String>>
+            val colors = mutableListOf<Pair<String, String>>()
+            for (map in colorsArray) {
+                colors.add(Pair(map["first"] as String, map["second"] as String))
+            }
+            return colors
         }
     }
 
@@ -60,16 +157,24 @@ data class DressModel(
 
     }
 
+    // mapper for Firebase Cloud Firestore
     fun toMap(): Map<String, Any> {
         return hashMapOf(
-            "id" to id,
-            "name" to name,
-            "oldPrice" to oldPrice,
-            "newPrice" to newPrice,
-            "isLiked" to isLiked,
-            "overallRating" to overallRating,
-            "numberOfVotes" to numberOfVotes,
-            "timeTill" to timeTill
+            ID_CODE to id,
+            NAME_CODE to name,
+            OLD_PRICE_CODE to oldPrice,
+            NEW_PRICE_CODE to newPrice,
+            IS_LIKED_CODE to isLiked,
+            OVERALL_RATING_CODE to overallRating,
+            NUMBER_OF_VOTES_CODE to numberOfVotes,
+            TIME_TILL_CODE to timeTill,
+            SIZE_CODE to sizes,
+            COLOR_NAME_CODE to colors,
+            DESCRIPTION_CODE to description,
+            PRODUCT_CODE_CODE to productCode,
+            CATEGORY_CODE to category,
+            MATERIAL_CODE to material,
+            COUNTRY_CODE to country
         )
     }
 }

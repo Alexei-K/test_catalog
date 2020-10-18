@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.kolis.test_catalog_app.R
+import com.kolis.test_catalog_app.data.DressModel
 import com.kolis.test_catalog_app.data.DressRepositoryImpl
 import kotlinx.android.synthetic.main.fragment_home.view.*
 

@@ -10,6 +10,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.kolis.test_catalog_app.ui.start_info.OnPasswordCheckObserver;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 public class DressRepositoryImpl implements DressRepository {
@@ -54,6 +55,8 @@ public class DressRepositoryImpl implements DressRepository {
         HashMap<String, String> profile = new HashMap<>();
         profile.put("login", login);
         profile.put("password", password);
+        Date date = new Date(System.currentTimeMillis());
+        profile.put("register date", date.toString());
 
         db.collection(PROFILES_COLLECTION_PATH)
                 .add(profile)
