@@ -1,4 +1,4 @@
-package com.kolis.test_catalog_app.ui.start_info;
+package com.kolis.test_catalog_app.ui.login;
 
 import android.app.AlertDialog;
 import android.content.ClipData;
@@ -45,7 +45,7 @@ public class StartInfoLastFragment extends StartInfoFragment implements OnPasswo
             startActivity(new Intent(v.getContext(), MainActivity.class));
             requireActivity().finish();
         });
-        TextView signIn = view.findViewById(R.id.signIn);
+        TextView signIn = view.findViewById(R.id.signInButton);
         signIn.setOnClickListener(v -> {
             showLoginDialog();
         });

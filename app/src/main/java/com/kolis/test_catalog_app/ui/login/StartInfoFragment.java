@@ -1,4 +1,4 @@
-package com.kolis.test_catalog_app.ui.start_info;
+package com.kolis.test_catalog_app.ui.login;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,14 +17,14 @@ import com.kolis.test_catalog_app.R;
 
 public class StartInfoFragment extends Fragment {
 
-    StartInfoViewModel viewModel;
+    WelcomeViewModel viewModel;
     public static final String INFO_IMAGE = "info image";
     public static final String INFO_TITLE = "info title";
     public static final String INFO_TEXT = "info text";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        viewModel = new ViewModelProvider(this).get(StartInfoViewModel.class);
+        viewModel = new ViewModelProvider(this).get(WelcomeViewModel.class);
         viewModel.setUpInfo(getArguments().getInt(INFO_IMAGE), getArguments().getString(INFO_TITLE), getArguments().getString(INFO_TEXT));
         super.onCreate(savedInstanceState);
     }

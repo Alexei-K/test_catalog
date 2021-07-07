@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.kolis.test_catalog_app.ui.start_info.OnPasswordCheckObserver;
+import com.kolis.test_catalog_app.ui.login.OnPasswordCheckObserver;
 
 import java.util.ArrayList;
 import java.util.Date;

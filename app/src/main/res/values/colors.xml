@@ -12,4 +12,5 @@
     <color name="light_grey">#A0A0A0</color>
     <color name="unselected_tab">#D6D6D6</color>
     <color name="greenPrimary">#5ECE7B</color>
+    <color name="orange">#ff781f</color>
 </resources>

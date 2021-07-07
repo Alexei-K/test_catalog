@@ -1,4 +1,4 @@
-package com.kolis.test_catalog_app.ui.start_info;
+package com.kolis.test_catalog_app.ui.login;
 
 import android.content.Context;
 import android.content.Intent;
@@ -47,9 +47,7 @@ public class StartInfoActivity extends AppCompatActivity {
                 getString(R.string.second_register_screen_title), getString(R.string.register_screen_text));
         adapter.addFragment(1, secondFragment);
 
-        StartInfoLastFragment thirdFragment = new StartInfoLastFragment();
-        setFragmentBundle(thirdFragment, R.drawable.registration_3,
-                "", getString(R.string.register_screen_text));
+        LoginFragment thirdFragment = new LoginFragment();
         adapter.addFragment(2, thirdFragment);
 
         pager.setAdapter(adapter);

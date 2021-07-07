@@ -1,10 +1,10 @@
-package com.kolis.test_catalog_app.ui.start_info;
+package com.kolis.test_catalog_app.ui.login;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class StartInfoViewModel extends ViewModel {
+public class WelcomeViewModel extends ViewModel {
 
     private MutableLiveData<Integer> _image = new MutableLiveData<>();
 

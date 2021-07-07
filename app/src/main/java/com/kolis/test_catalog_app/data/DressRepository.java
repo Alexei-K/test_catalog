@@ -2,7 +2,7 @@ package com.kolis.test_catalog_app.data;
 
 import androidx.lifecycle.LiveData;
 
-import com.kolis.test_catalog_app.ui.start_info.OnPasswordCheckObserver;
+import com.kolis.test_catalog_app.ui.login.OnPasswordCheckObserver;
 
 import java.util.ArrayList;
 

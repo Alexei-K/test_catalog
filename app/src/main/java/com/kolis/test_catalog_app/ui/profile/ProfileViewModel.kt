@@ -4,7 +4,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.lifecycle.ViewModel
 import androidx.preference.PreferenceManager
-import com.kolis.test_catalog_app.ui.start_info.StartInfoActivity
+import com.kolis.test_catalog_app.ui.login.StartInfoActivity
 import com.kolis.test_catalog_app.util.PrefConstants
 
 class ProfileViewModel : ViewModel() {

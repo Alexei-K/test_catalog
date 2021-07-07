@@ -13,14 +13,19 @@
     <string name="time_remain_zero_days">Remain: %dh:%dm</string>
     <string name="sign_in">Sign In</string>
     <string name="sign_up">Sign Up</string>
+    <string name="register">Register</string>
+    <string name="resrore_password">Restore password</string>
 
-    <!--    Password dialog-->
+    <!--    Login fragment-->
     <string name="you_are_registered">You are registered</string>
     <string name="login_password">Login: %s \nPassword: %s</string>
     <string name="copy_to_clipboard">Copy to clipboard</string>
     <string name="password_is_wrong">Wrong password or user name.</string>
     <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="remember_me">Remember me</string>
     <string name="enter_login">Enter login and password</string>
+    <string name="work_in_progress">We are working on this feature.</string>
 
     <string name="leave_profile">Leave profile</string>
 
