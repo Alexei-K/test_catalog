@@ -1,6 +1,7 @@
 package com.kolis.test_catalog_app.ui.login
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -23,6 +24,9 @@ class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
+    private val preferences: SharedPreferences
+        get() = PreferenceManager.getDefaultSharedPreferences(requireContext())
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
@@ -30,8 +34,19 @@ class LoginFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentLoginBinding.inflate(inflater)
+        checkRememberMe()
         setupListeners()
         return binding.root
+    }
+
+    private fun checkRememberMe() {
+        val isRemember = preferences.getBoolean(PrefConstants.IS_REMEMBER_ME_PREF, false)
+        binding.rememberMeCheckbox.isChecked = isRemember
+        if (isRemember) {
+            binding.loginText.setText(preferences.getString(PrefConstants.USER_NAME_PREF, ""))
+        } else {
+            binding.loginText.setText("")
+        }
     }
 
     private fun setupListeners() {
@@ -50,24 +65,25 @@ class LoginFragment : Fragment() {
                 Toast.LENGTH_LONG
             ).show()
         }
+
+        binding.rememberMeCheckbox.setOnCheckedChangeListener { buttonView, isChecked ->
+            viewModel.setRememberMe(isChecked, preferences)
+        }
     }
 
     private fun logIn(login: String, password: String) {
         viewModel.signIn(login, password)
             .observeOnce(viewLifecycleOwner, Observer { loginResult ->
                 if (loginResult.success) {
-                    startMainActivity(login, password)
+                    viewModel.saveLoginPassword(login, password, preferences)
+                    startMainActivity()
                 } else {
                     Toast.makeText(requireContext(), loginResult.errorMessage, Toast.LENGTH_LONG).show()
                 }
             })
     }
 
-    private fun startMainActivity(login: String, password: String) {
-        val pref = PreferenceManager.getDefaultSharedPreferences(requireContext())
-        pref.edit().putBoolean(PrefConstants.IS_LOGGED_PREF, true).apply()
-        pref.edit().putString(PrefConstants.USER_NAME_PREF, login).apply()
-        pref.edit().putString(PrefConstants.USER_PASSWORD_PREF, password).apply()
+    private fun startMainActivity() {
         startActivity(Intent(requireContext(), MainActivity::class.java))
         requireActivity().finish()
     }

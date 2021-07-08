@@ -4,5 +4,5 @@ import androidx.lifecycle.MutableLiveData
 import com.kolis.test_catalog_app.util.RequestResult
 
 interface UserRepository {
-    fun isPasswordCorrect (login:String, password:String, result: MutableLiveData<RequestResult>)
+    fun isPasswordCorrect (login:String, password:String): MutableLiveData<RequestResult>
 }

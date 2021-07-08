@@ -65,7 +65,7 @@ public class RepositoryImpl implements DressRepository {
     }
 
     @Override
-    public void isPasswordRight(String login, String password, OnPasswordCheckObserver observer) :Boolean {
+    public void isPasswordRight(String login, String password, OnPasswordCheckObserver observer) {
         db.collection(PROFILES_COLLECTION_PATH).whereEqualTo("login", login).whereEqualTo("password", password).get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
