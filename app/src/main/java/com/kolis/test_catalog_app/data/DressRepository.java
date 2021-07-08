@@ -14,6 +14,6 @@ interface DressRepository {
 
     void addProfile(String login, String password);
 
-    void isRightPassword(String login, String password, OnPasswordCheckObserver observer);
+    void isPasswordRight(String login, String password, OnPasswordCheckObserver observer);
 
 }

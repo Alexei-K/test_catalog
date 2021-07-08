@@ -22,7 +22,6 @@ import static androidx.fragment.app.FragmentPagerAdapter.BEHAVIOR_SET_USER_VISIB
 
 public class StartInfoActivity extends AppCompatActivity {
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

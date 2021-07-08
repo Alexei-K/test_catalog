@@ -21,20 +21,20 @@ import androidx.preference.PreferenceManager;
 
 import com.kolis.test_catalog_app.MainActivity;
 import com.kolis.test_catalog_app.R;
-import com.kolis.test_catalog_app.data.DressRepositoryImpl;
+import com.kolis.test_catalog_app.data.RepositoryImpl;
 import com.kolis.test_catalog_app.util.PasswordGenerator;
 
 import static com.kolis.test_catalog_app.util.PrefConstants.IS_LOGGED_PREF;
 import static com.kolis.test_catalog_app.util.PrefConstants.USER_NAME_PREF;
 import static com.kolis.test_catalog_app.util.PrefConstants.USER_PASSWORD_PREF;
 
+//TODO Delete when finish with login/registration
 public class StartInfoLastFragment extends StartInfoFragment implements OnPasswordCheckObserver {
 
-    DressRepositoryImpl db = new DressRepositoryImpl();
+    RepositoryImpl db = new RepositoryImpl();
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
         TextView title = view.findViewById(R.id.title_info);
         title.setVisibility(View.INVISIBLE);
         ViewStub stub = view.findViewById(R.id.stub);
@@ -93,7 +93,7 @@ public class StartInfoLastFragment extends StartInfoFragment implements OnPasswo
                             Toast.makeText(requireContext(), "Invalid username or password", Toast.LENGTH_LONG).show();
                             showLoginDialog();
                         } else {
-                            db.isRightPassword(username, password, StartInfoLastFragment.this);
+                            db.isPasswordRight(username, password, StartInfoLastFragment.this);
                         }
 
                     }

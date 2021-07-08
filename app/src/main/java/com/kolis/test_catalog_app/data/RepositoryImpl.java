@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
-public class DressRepositoryImpl implements DressRepository {
+public class RepositoryImpl implements DressRepository {
     private static String DRESS_COLLECTION_PATH = "dresses";
     private static String PROFILES_COLLECTION_PATH = "profiles_4578";
     public static String TAG = "firebase_debug";
@@ -65,7 +65,7 @@ public class DressRepositoryImpl implements DressRepository {
     }
 
     @Override
-    public void isRightPassword(String login, String password, OnPasswordCheckObserver observer) {
+    public void isPasswordRight(String login, String password, OnPasswordCheckObserver observer) :Boolean {
         db.collection(PROFILES_COLLECTION_PATH).whereEqualTo("login", login).whereEqualTo("password", password).get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {

@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.kolis.test_catalog_app.R;
 import com.kolis.test_catalog_app.data.DressModel;
-import com.kolis.test_catalog_app.data.DressRepositoryImpl;
 
 import java.util.ArrayList;
 
