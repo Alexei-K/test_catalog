@@ -13,4 +13,7 @@
     <color name="unselected_tab">#D6D6D6</color>
     <color name="greenPrimary">#5ECE7B</color>
     <color name="orange">#ff781f</color>
+
+    <color name="deepGreen">#90c212</color>
+    <color name="darkGreen">#566d06</color>
 </resources>

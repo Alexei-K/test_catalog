@@ -8,6 +8,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
+import com.firebase.ui.auth.FirebaseUiException
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.kolis.test_catalog_app.ui.login.LoginActivity
 import com.kolis.test_catalog_app.util.PrefConstants
@@ -15,7 +16,6 @@ import com.kolis.test_catalog_app.util.PrefConstants
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         checkIfLoggedIn()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

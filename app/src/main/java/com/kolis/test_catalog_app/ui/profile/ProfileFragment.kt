@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
+import com.firebase.ui.auth.AuthUI
 import com.kolis.test_catalog_app.R
 import com.kolis.test_catalog_app.util.PrefConstants
 import kotlinx.android.synthetic.main.fragment_profile.view.*
@@ -30,6 +31,12 @@ class ProfileFragment : Fragment() {
         if (pref.getBoolean(PrefConstants.IS_LOGGED_PREF, false)) {
             root.leaveProfile.setOnClickListener {
                 viewModel.onLeaveProfile(this)
+                AuthUI.getInstance()
+                    .signOut(requireContext())
+
+                AuthUI.getInstance()
+                    .signOut(requireContext())
+
             }
             root.leaveProfile.visibility = View.VISIBLE
         }

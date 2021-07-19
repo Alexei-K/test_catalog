@@ -15,7 +15,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
-        tools:src="@drawable/registration_2" />
+        tools:src="@drawable/registration_2"
+        tools:ignore="ContentDescription" />
 
     <ViewStub
         android:layout_width="wrap_content"
@@ -59,20 +60,24 @@
         app:layout_constraintTop_toBottomOf="@id/title_info"
         tools:text="Lorem Ipsum Dolor Sit Amet Consectetur Adipisicing Elit" />
 
-    <TextView
-        android:id="@+id/skip_button"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/signInRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif"
-        android:gravity="center_horizontal"
-        android:textColor="@color/greenPrimary"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textColor="@color/darkGreen"
+        android:background="@drawable/login_button_background"
         android:textSize="16sp"
         android:visibility="gone"
-        android:layout_marginBottom="35dp"
-        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="150dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="@string/skip" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title_info"
+        android:text="@string/get_started"
+        tools:visibility="visible"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

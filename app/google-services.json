@@ -1,34 +1,41 @@
 {
   "project_info": {
-    "project_number": "1007656772296",
-    "firebase_url": "https://test-dress-project.firebaseio.com",
-    "project_id": "test-dress-project",
-    "storage_bucket": "test-dress-project.appspot.com"
+    "project_number": "400656166437",
+    "project_id": "shop-8000b",
+    "storage_bucket": "shop-8000b.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1007656772296:android:f81c36c9f170645ad97bfd",
+        "mobilesdk_app_id": "1:400656166437:android:cc0c5f340da1a21eef99cc",
         "android_client_info": {
           "package_name": "com.kolis.test_catalog_app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1007656772296-a6ojjta6k7pje8ckk1sk45p3ppl06ebq.apps.googleusercontent.com",
+          "client_id": "400656166437-viq6pvvqaaiv3pa9h94me6fcqthijuu6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kolis.test_catalog_app",
+            "certificate_hash": "9ba34d28b33188a5258af94b5fb7e3a9c96e8de3"
+          }
+        },
+        {
+          "client_id": "400656166437-0jloroti6a3idl8hpr4flg21stbs4jaf.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBRvc4NOB5D2zfhGTHPEQ6rxPqRkSVwAjw"
+          "current_key": "AIzaSyADuHNWxbo21fqFjlvAXfNvG67Xk_K7CV4"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1007656772296-a6ojjta6k7pje8ckk1sk45p3ppl06ebq.apps.googleusercontent.com",
+              "client_id": "400656166437-0jloroti6a3idl8hpr4flg21stbs4jaf.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

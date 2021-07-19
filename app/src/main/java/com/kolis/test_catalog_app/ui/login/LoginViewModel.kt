@@ -16,10 +16,6 @@ class LoginViewModel : ViewModel() {
         return repository.isPasswordCorrect(login, password)
     }
 
-    fun setRememberMe(isRemembered: Boolean, pref: SharedPreferences) {
-        pref.edit().putBoolean(PrefConstants.IS_REMEMBER_ME_PREF, isRemembered).apply()
-    }
-
     fun saveLoginPassword(login: String, password: String, pref: SharedPreferences) {
         pref.edit().putBoolean(PrefConstants.IS_LOGGED_PREF, true).apply()
         pref.edit().putString(PrefConstants.USER_NAME_PREF, login).apply()
