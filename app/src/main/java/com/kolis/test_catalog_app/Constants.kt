@@ -7,5 +7,6 @@ object Constants {
     const val MIN_LOGIN_LENGTH = 4
     const val MAX_LOGIN_LENGTH = 16
     const val NO_PASSWORD_STRING = ""
+    const val IS_LOGIN_REQUIRED = false
 
 }

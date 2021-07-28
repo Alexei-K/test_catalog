@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.kolis.test_catalog_app.R
+import com.kolis.test_catalog_app.data.DressModel
 import com.kolis.test_catalog_app.data.RepositoryImpl
 import kotlinx.android.synthetic.main.fragment_home.view.*
 
@@ -31,7 +32,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         adapter.controller = Navigation.findNavController(view)
         val db = RepositoryImpl()
-        db.allDressesLD.observe(viewLifecycleOwner, Observer {
+        db.allDressesLD.observe(viewLifecycleOwner, {
             adapter.setModelsList(it)
         })
         view.recipesRecycleView.adapter = adapter

@@ -14,6 +14,7 @@ import androidx.preference.PreferenceManager;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
+import com.kolis.test_catalog_app.Constants;
 import com.kolis.test_catalog_app.MainActivity;
 import com.kolis.test_catalog_app.R;
 import com.kolis.test_catalog_app.util.PrefConstants;
@@ -62,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void checkRegistration() {
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
-        if (pref.getBoolean(PrefConstants.IS_LOGGED_PREF, false)) {
+        if (pref.getBoolean(PrefConstants.IS_LOGGED_PREF, false) || !Constants.IS_LOGIN_REQUIRED) {
             startActivity(new Intent(this, MainActivity.class));
             finish();
         }
