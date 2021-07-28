@@ -13,17 +13,19 @@
         android:background="@color/colorPrimary"
         android:textCursorDrawable="@null"
         app:iconifiedByDefault="false"
-        app:queryBackground="@null"
-        />
+        app:layout_constraintBottom_toTopOf="@id/recipesRecycleView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:queryBackground="@null" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recipesRecycleView"
-        android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dress_search"
         app:spanCount="2"
         tools:listitem="@layout/product_item_view" />
 
