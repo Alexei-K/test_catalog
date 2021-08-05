@@ -5,12 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.kolis.test_catalog_app.R
-import com.kolis.test_catalog_app.data.DressModel
-import com.kolis.test_catalog_app.data.RepositoryImpl
+import com.kolis.test_catalog_app.data.dress.DressRepository
 import kotlinx.android.synthetic.main.fragment_home.view.*
 
 class HomeFragment : Fragment() {
@@ -31,7 +29,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         adapter.controller = Navigation.findNavController(view)
-        val db = RepositoryImpl()
+        val db = DressRepository()
         db.allDressesLD.observe(viewLifecycleOwner, {
             adapter.setModelsList(it)
         })

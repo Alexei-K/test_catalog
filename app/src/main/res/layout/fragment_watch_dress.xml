@@ -140,12 +140,12 @@
             android:text="@string/add_to_cart"
             android:textColor="@color/white"
             android:textSize="14sp"
-            app:layout_constraintStart_toEndOf="@id/numberSpinner"
+            app:layout_constraintStart_toEndOf="@id/addToCartQuantity"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/colorSpinner" />
 
         <Spinner
-            android:id="@+id/numberSpinner"
+            android:id="@+id/addToCartQuantity"
             android:gravity="center_vertical"
             android:entries="@array/numberOfItems"
             android:layout_width="wrap_content"

@@ -11,6 +11,8 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.navArgs
 import com.kolis.test_catalog_app.R
 import com.kolis.test_catalog_app.data.DressModel
+import com.kolis.test_catalog_app.data.DressSize
+import com.kolis.test_catalog_app.data.dress.DressInCartModel
 import kotlinx.android.synthetic.main.fragment_watch_dress.*
 import java.util.*
 
@@ -53,11 +55,11 @@ class WatchDressFragment : Fragment() {
         productCountry.text = getString(R.string.country, dressModel.country)
         sizeSpinner.adapter = SpinnerAdapter(
             context, android.R.layout.simple_spinner_item,
-            dressModel.sizes.toTypedArray()
+            dressModel.sizes.map { it.nameShort }
         )
         colorSpinner.adapter = SpinnerAdapter(
             context, android.R.layout.simple_spinner_item,
-            dressModel.colors.map { it.first }.toTypedArray()
+            dressModel.colors.map { it.first }
         )
 
     }
@@ -85,6 +87,17 @@ class WatchDressFragment : Fragment() {
     private fun initListeners() {
         closeFragment.setOnClickListener {
             requireActivity().onBackPressed()
+        }
+
+        addToCart.setOnClickListener {
+            viewModel.addToCart(
+                DressInCartModel(
+                    dressModel,
+                    addToCartQuantity.selectedItem as Int,
+                    DressSize.valueOf(sizeSpinner.selectedItem.toString()),
+                    colorSpinner.selectedItem.toString()
+                )
+            )
         }
     }
 }

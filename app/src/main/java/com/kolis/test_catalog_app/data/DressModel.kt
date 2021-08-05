@@ -15,7 +15,7 @@ data class DressModel(
     val overallRating: Long,
     val numberOfVotes: Long,
     val timeTill: Long = 0L,
-    val sizes: List<String>,
+    val sizes: List<DressSize>,
     val colors: List<Pair<String, String>>,
     val description: String,
     val productCode: String,
@@ -42,62 +42,62 @@ data class DressModel(
         val sampleList = arrayListOf(
             DressModel(
                 0, "Scaridian dress", 100.00f, 50.00f, false, 80, 83, 1602798596177,
-                listOf("small", "medium", "Large", "tiny", "XL", "XXL"), sampleColors,
+                DressSize.allSizes, sampleColors,
                 sampleDesription, "578902-00", "Sweater", "Cotton", "Spain"
             ),
             DressModel(
                 1, "Wool dress", 200.00f, 180.00f, false, 100, 12, 1602885996177,
-                listOf("small", "medium", "Large", "tiny", "XL", "XXL"), sampleColors,
+                DressSize.allSizes, sampleColors,
                 sampleDesription, "578902-00", "Sweater", "Cotton", "China"
             ),
             DressModel(
                 2, "Cream cotton dress", 150.00f, 100.00f, true, 120, 28, 1602962396177,
-                listOf("small", "medium", "Large", "tiny", "XL", "XXL"), sampleColors,
+                DressSize.allSizes, sampleColors,
                 sampleDesription, "578902-00", "Sweater", "Cotton", "Ukraine"
             ),
             DressModel(
                 3, "Black dress", 120.00f, 120.00f, true, 2, 1, 7,
-                listOf("small", "medium", "Large", "tiny", "XL", "XXL"), sampleColors,
+                DressSize.allSizes, sampleColors,
                 sampleDesription, "578902-00", "Sweater", "Cotton", "Spain"
             ),
             DressModel(
                 4, "Scaridian dress", 120.00f, 50.00f, false, 40, 24, 7,
-                listOf("small", "medium", "Large", "tiny", "XL", "XXL"), sampleColors,
+                DressSize.allSizes, sampleColors,
                 sampleDesription, "578902-00", "Sweater", "Cotton", "Spain"
             ),
             DressModel(
                 5, "Black dress", 1000.00f, 250.00f, true, 45, 12, 7,
-                listOf("small", "medium", "Large", "tiny", "XL", "XXL"), sampleColors,
+                DressSize.allSizes, sampleColors,
                 sampleDesription, "578902-00", "Sweater", "Cotton", "China"
             ),
             DressModel(
                 6, "Scaridian dress", 20.00f, 20.00f, false, 54, 40, 1609796996177,
-                listOf("small", "medium", "Large", "tiny", "XL", "XXL"), sampleColors,
+                DressSize.allSizes, sampleColors,
                 sampleDesription, "578902-00", "Sweater", "Cotton", "Spain"
             ),
             DressModel(
                 7, "Wool dress", 160.00f, 16.00f, true, 80, 58, 7,
-                listOf("small", "medium", "Large", "tiny", "XL", "XXL"), sampleColors,
+                DressSize.allSizes, sampleColors,
                 sampleDesription, "578902-00", "Sweater", "Cotton", "China"
             ),
             DressModel(
                 8, "Scaridian dress", 120.00f, 120.00f, false, 100, 26, 1607890006177,
-                listOf("small", "medium", "Large", "tiny", "XL", "XXL"), sampleColors,
+                DressSize.allSizes, sampleColors,
                 sampleDesription, "578902-00", "Sweater", "Cotton", "Spain"
             ),
             DressModel(
                 9, "Wool dress", 120.00f, 50.00f, true, 120, 40, 7,
-                listOf("small", "medium", "Large", "tiny", "XL", "XXL"), sampleColors,
+                DressSize.allSizes, sampleColors,
                 sampleDesription, "578902-00", "Sweater", "Cotton", "Spain"
             ),
             DressModel(
                 10, "Scaridian dress", 160.00f, 50.00f, true, 80, 16, 7,
-                listOf("small", "medium", "Large", "tiny", "XL", "XXL"), sampleColors,
+                DressSize.allSizes, sampleColors,
                 sampleDesription, "578902-00", "Sweater", "Cotton", "Spain"
             ),
             DressModel(
                 1, "Black dress", 200.00f, 50.00f, false, 40, 40, 7,
-                listOf("small", "medium", "Large", "tiny", "XL", "XXL"), sampleColors,
+                DressSize.allSizes, sampleColors,
                 sampleDesription, "578902-00", "Sweater", "Cotton", "Spain"
             )
         )
@@ -128,7 +128,7 @@ data class DressModel(
                 document[OVERALL_RATING_CODE] as Long,
                 document[NUMBER_OF_VOTES_CODE] as Long,
                 document[TIME_TILL_CODE] as Long,
-                document[SIZE_CODE] as ArrayList<String>,
+                (document[SIZE_CODE] as List<String>).map { DressSize.valueOf(it) },
                 getColorsFromFirebaseDocument(document),
                 document[DESCRIPTION_CODE] as String,
                 document[PRODUCT_CODE_CODE] as String,
@@ -175,7 +175,7 @@ data class DressModel(
             OVERALL_RATING_CODE to overallRating,
             NUMBER_OF_VOTES_CODE to numberOfVotes,
             TIME_TILL_CODE to timeTill,
-            SIZE_CODE to sizes,
+            SIZE_CODE to sizes.map { it.nameShort },
             COLOR_NAME_CODE to colors,
             DESCRIPTION_CODE to description,
             PRODUCT_CODE_CODE to productCode,
