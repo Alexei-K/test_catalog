@@ -7,7 +7,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class DressModel(
-    val id: Int,
+    val id: Long,
     val name: String,
     val oldPrice: Float,
     val newPrice: Float,
@@ -120,7 +120,7 @@ data class DressModel(
 
         fun fromFirebaseDocument(document: QueryDocumentSnapshot): DressModel {
             return DressModel(
-                (document[ID_CODE] as Long).toInt(),
+                document[ID_CODE] as Long,
                 document[NAME_CODE] as String,
                 (document[OLD_PRICE_CODE] as Double).toFloat(),
                 (document[NEW_PRICE_CODE] as Double).toFloat(),
@@ -128,7 +128,7 @@ data class DressModel(
                 document[OVERALL_RATING_CODE] as Long,
                 document[NUMBER_OF_VOTES_CODE] as Long,
                 document[TIME_TILL_CODE] as Long,
-                (document[SIZE_CODE] as List<String>).map { DressSize.valueOf(it) },
+                (document[SIZE_CODE] as List<String>).map { DressSize.byName(it) },
                 getColorsFromFirebaseDocument(document),
                 document[DESCRIPTION_CODE] as String,
                 document[PRODUCT_CODE_CODE] as String,
@@ -153,10 +153,10 @@ data class DressModel(
     // For testing purpose
     fun getTestImageResource(): Int {
         return when (id % 4) {
-            0 -> R.drawable.image_test
-            1 -> R.drawable.image_test2
-            2 -> R.drawable.image_test3
-            3 -> R.drawable.image_test4
+            0L -> R.drawable.image_test
+            1L -> R.drawable.image_test2
+            2L -> R.drawable.image_test3
+            3L -> R.drawable.image_test4
             else -> R.drawable.image_test4
         }
 

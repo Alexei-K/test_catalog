@@ -29,7 +29,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         adapter.controller = Navigation.findNavController(view)
-        val db = DressRepository()
+        val db = DressRepository(requireContext())
         db.allDressesLD.observe(viewLifecycleOwner, {
             adapter.setModelsList(it)
         })

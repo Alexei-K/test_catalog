@@ -3,8 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: "androidx.navigation.safeargs"
 apply plugin: 'com.google.gms.google-services'
-
-
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 29
@@ -71,9 +70,10 @@ dependencies {
     //phone login
     implementation 'com.google.firebase:firebase-auth'
 
+    implementation 'androidx.preference:preference-ktx:1.1.1'
 
-    implementation 'androidx.preference:preference:1.1.1'
-
-
-
+    // ROOM DATABASE
+    def room_version = "2.3.0"
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
 }

@@ -1,5 +1,6 @@
 package com.kolis.test_catalog_app.data.dress
 
+import android.content.Context
 import android.util.Log
 import com.kolis.test_catalog_app.data.DressModel.Companion.fromFirebaseDocument
 import com.google.firebase.firestore.FirebaseFirestore
@@ -9,26 +10,41 @@ import androidx.lifecycle.LiveData
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.QuerySnapshot
+import com.kolis.test_catalog_app.data.dress.db.DressDatabase
+import com.kolis.test_catalog_app.data.dress.db.DressInCartEntity
 import com.kolis.test_catalog_app.ui.login.OnPasswordCheckObserver
 import java.lang.Exception
 import java.util.*
 
-class DressRepository : DressRepositoryType {
-    var db = FirebaseFirestore.getInstance()
+class DressRepository(context: Context) : DressRepositoryType {
+
+    companion object {
+        private const val DRESS_COLLECTION_PATH = "dresses"
+        private const val PROFILES_COLLECTION_PATH = "profiles_4578"
+        var TAG = "firebase_debug"
+    }
+
+    private var firebaseDatabase = FirebaseFirestore.getInstance()
+
+    private var dressDatabase = DressDatabase.getInstance(context)
     private val _allDresses = MutableLiveData<List<DressModel>>()
     private fun allDresses(): LiveData<List<DressModel>> {
         return _allDresses
     }
 
+    init {
+
+    }
+
     override fun addDress(model: DressModel?) {
-        db.collection(DRESS_COLLECTION_PATH).add(model!!.toMap())
+        firebaseDatabase.collection(DRESS_COLLECTION_PATH).add(model!!.toMap())
             .addOnSuccessListener { documentReference: DocumentReference -> Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.id) }
             .addOnFailureListener { exception: Exception? -> Log.d(TAG, "upload failed ") }
     }
 
     override val allDressesLD: LiveData<List<DressModel>>
         get() {
-            db.collection(DRESS_COLLECTION_PATH)
+            firebaseDatabase.collection(DRESS_COLLECTION_PATH)
                 .get()
                 .addOnCompleteListener { task: Task<QuerySnapshot> ->
                     if (task.isSuccessful) {
@@ -45,8 +61,9 @@ class DressRepository : DressRepositoryType {
             return allDresses()
         }
 
-    override fun addDressToCart(dress: DressInCartModel) {
-        //TODO implement
+    override suspend fun addDressToCart(dress: DressInCartModel) {
+        val id = dressDatabase.dressInCardDao().addItemInCard(DressInCartEntity.fromModel(dress))
+        Log.d("AlexLog", "Item with id $id added to cart")
     }
 
     override fun addProfile(login: String?, password: String?) {
@@ -55,14 +72,14 @@ class DressRepository : DressRepositoryType {
         profile["password"] = password
         val date = Date(System.currentTimeMillis())
         profile["register date"] = date.toString()
-        db.collection(PROFILES_COLLECTION_PATH)
+        firebaseDatabase.collection(PROFILES_COLLECTION_PATH)
             .add(profile)
             .addOnSuccessListener { documentReference: DocumentReference -> Log.d(TAG, "Login added " + documentReference.id) }
             .addOnFailureListener { documentReference: Exception? -> Log.d(TAG, "Login adding failed! ") }
     }
 
     override fun isPasswordRight(login: String?, password: String?, observer: OnPasswordCheckObserver) {
-        db.collection(PROFILES_COLLECTION_PATH).whereEqualTo("login", login).whereEqualTo("password", password).get()
+        firebaseDatabase.collection(PROFILES_COLLECTION_PATH).whereEqualTo("login", login).whereEqualTo("password", password).get()
             .addOnCompleteListener { task: Task<QuerySnapshot?> ->
                 if (task.isSuccessful) {
                     if (task.result != null) {
@@ -78,9 +95,12 @@ class DressRepository : DressRepositoryType {
             }
     }
 
-    companion object {
-        private const val DRESS_COLLECTION_PATH = "dresses"
-        private const val PROFILES_COLLECTION_PATH = "profiles_4578"
-        var TAG = "firebase_debug"
+    /**
+     * for test purpose only
+     */
+    fun addSampleDataToFirebase() {
+        DressModel.sampleList.forEach {
+            addDress(it)
+        }
     }
 }

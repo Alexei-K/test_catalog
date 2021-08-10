@@ -47,11 +47,11 @@
         <item quantity="other">Remain: %d days, %dh:%dm</item>
     </plurals>
 
-    <integer-array name="numberOfItems">
+    <string-array name="numberOfItems">
         <item>1</item>
         <item>2</item>
         <item>3</item>
         <item>4</item>
         <item>5</item>
-    </integer-array>
+    </string-array>
 </resources>

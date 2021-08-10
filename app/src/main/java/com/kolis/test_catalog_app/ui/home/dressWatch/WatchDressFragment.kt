@@ -7,17 +7,22 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.kolis.test_catalog_app.R
 import com.kolis.test_catalog_app.data.DressModel
 import com.kolis.test_catalog_app.data.DressSize
 import com.kolis.test_catalog_app.data.dress.DressInCartModel
+import com.kolis.test_catalog_app.data.dress.DressRepository
 import kotlinx.android.synthetic.main.fragment_watch_dress.*
 import java.util.*
 
 class WatchDressFragment : Fragment() {
-    private lateinit var viewModel: WatchDressViewModel
+
+    private val viewModel: WatchDressViewModel by viewModels {
+        WatchDressViewModelFactory(DressRepository(requireContext()))
+    }
+
     private val args: WatchDressFragmentArgs by navArgs()
     lateinit var dressModel: DressModel
 
@@ -26,7 +31,6 @@ class WatchDressFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewModel = ViewModelProviders.of(this).get(WatchDressViewModel::class.java)
         dressModel = args.model
         return inflater.inflate(R.layout.fragment_watch_dress, container, false)
     }
@@ -93,8 +97,8 @@ class WatchDressFragment : Fragment() {
             viewModel.addToCart(
                 DressInCartModel(
                     dressModel,
-                    addToCartQuantity.selectedItem as Int,
-                    DressSize.valueOf(sizeSpinner.selectedItem.toString()),
+                    (addToCartQuantity.selectedItem as String).toInt(),
+                    DressSize.byName(sizeSpinner.selectedItem.toString()),
                     colorSpinner.selectedItem.toString()
                 )
             )

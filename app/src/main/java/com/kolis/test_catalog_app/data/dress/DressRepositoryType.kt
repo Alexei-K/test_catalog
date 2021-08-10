@@ -10,7 +10,7 @@ import java.util.*
 
     val allDressesLD: LiveData<List<DressModel>>
 
-    fun addDressToCart(dress:DressInCartModel)
+    suspend fun addDressToCart(dress:DressInCartModel)
 
     fun addProfile(login: String?, password: String?)
     fun isPasswordRight(login: String?, password: String?, observer: OnPasswordCheckObserver)
