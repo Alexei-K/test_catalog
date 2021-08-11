@@ -1,6 +1,5 @@
 package com.kolis.test_catalog_app.ui.cart
 
-import android.app.Application
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,8 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.kolis.test_catalog_app.MainActivity
+import com.kolis.test_catalog_app.R
 import com.kolis.test_catalog_app.data.dress.DressRepository
 import com.kolis.test_catalog_app.databinding.FragmentCartBinding
+import com.kolis.test_catalog_app.util.toDollars
+import kotlinx.android.synthetic.main.fragment_cart.*
 
 class CartFragment : Fragment() {
 
@@ -24,14 +26,20 @@ class CartFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentCartBinding.inflate(inflater)
-        setupRecycler()
+        setupView()
         return binding.root
     }
 
-    private fun setupRecycler() {
+    private fun setupView() {
+
         cartViewModel.getAllCartItems().observe(viewLifecycleOwner) {
             adapter.setModelsList(it)
         }
+
         binding.cartRecycler.adapter = adapter
+
+        cartViewModel.getTotalCartPrice().observe(viewLifecycleOwner) { totalPrice ->
+            binding.totalPrice.text = resources.getString(R.string.total_price, totalPrice.toDollars())
+        }
     }
 }

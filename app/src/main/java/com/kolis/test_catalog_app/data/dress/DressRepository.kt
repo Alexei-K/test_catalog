@@ -16,7 +16,6 @@ import com.kolis.test_catalog_app.data.dress.db.DressInCartEntity
 import com.kolis.test_catalog_app.ui.login.OnPasswordCheckObserver
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.lang.Exception
 import java.util.*
@@ -91,6 +90,16 @@ class DressRepository(context: Context) : DressRepositoryType {
             entityList.map { entity ->
                 entity.toModel()
             }
+        }
+    }
+
+    override fun totalCartPrice(): LiveData<Float> {
+        return Transformations.map(dressDatabase.dressInCardDao().dressesInCart()) { entityList ->
+            var totalPrice = 0f
+            entityList.forEach { dress ->
+                totalPrice += dress.newPrice * dress.amount
+            }
+            totalPrice
         }
     }
 

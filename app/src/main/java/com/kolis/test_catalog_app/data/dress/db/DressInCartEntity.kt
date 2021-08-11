@@ -22,7 +22,7 @@ data class DressInCartEntity(
     val category: String,
     val material: String,
     val country: String,
-    val quantity: Int,
+    val amount: Int,
     val size: DressSize,
     val color: String
 ) {
@@ -61,7 +61,7 @@ data class DressInCartEntity(
                 mutableListOf(), mutableListOf(),
                 description, productCode, category, material, country
             ),
-            quantity,
+            amount,
             size,
             color
 

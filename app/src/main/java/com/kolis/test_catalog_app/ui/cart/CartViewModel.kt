@@ -10,4 +10,8 @@ class CartViewModel(private val dressRepository: DressRepositoryType) : ViewMode
     fun getAllCartItems(): LiveData<List<DressInCartModel>> {
         return dressRepository.dressesInCart()
     }
+
+    fun getTotalCartPrice(): LiveData<Float> {
+        return dressRepository.totalCartPrice()
+    }
 }

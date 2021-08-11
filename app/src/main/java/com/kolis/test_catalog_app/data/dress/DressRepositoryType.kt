@@ -16,6 +16,7 @@ interface DressRepositoryType {
     fun isAnyDressInCart(): LiveData<Boolean>
     fun countDressInCart(): LiveData<Int>
     fun dressesInCart(): LiveData<List<DressInCartModel>>
+    fun totalCartPrice(): LiveData<Float>
 
     //TODO Remove later
     fun addProfile(login: String?, password: String?)

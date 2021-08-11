@@ -32,6 +32,8 @@
     <!-- Card fragment-->
     <string name="color_size">Color - %1$s,\nSize - %2$s</string>
     <string name="removed_from_cart">%1$s was removed from the cart.</string>
+    <string name="checkout">Checkout >></string>
+    <string name="total_price">Total: %s</string>
 
     <string name="leave_profile">Leave profile</string>
 
