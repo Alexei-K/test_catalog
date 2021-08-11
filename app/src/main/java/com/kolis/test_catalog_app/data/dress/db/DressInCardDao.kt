@@ -1,5 +1,6 @@
 package com.kolis.test_catalog_app.data.dress.db
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao
@@ -15,5 +16,8 @@ interface DressInCardDao {
 
     @Query(value = "DELETE FROM ${DressInCartEntity.TABLE_NAME}")
     fun deleteAllItemsFromCard()
+
+    @Query(value = "SELECT COUNT(*) FROM ${DressInCartEntity.TABLE_NAME}")
+    fun countDressInCart(): LiveData<Int>
 
 }

@@ -31,9 +31,9 @@
         tools:layout="@layout/fragment_empty" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_cart"
         android:name="com.kolis.test_catalog_app.ui.EmptyFragment"
-        android:label="@string/title_notifications"
+        android:label="@string/title_cart"
         tools:layout="@layout/fragment_empty" />
     <fragment
         android:id="@+id/navigation_profile"

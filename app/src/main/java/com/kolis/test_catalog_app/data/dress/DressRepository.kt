@@ -7,6 +7,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import androidx.lifecycle.MutableLiveData
 import com.kolis.test_catalog_app.data.DressModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.QuerySnapshot
@@ -64,6 +65,16 @@ class DressRepository(context: Context) : DressRepositoryType {
     override suspend fun addDressToCart(dress: DressInCartModel) {
         val id = dressDatabase.dressInCardDao().addItemInCard(DressInCartEntity.fromModel(dress))
         Log.d("AlexLog", "Item with id $id added to cart")
+    }
+
+    override fun isAnyDressInCart(): LiveData<Boolean> {
+        return Transformations.map(dressDatabase.dressInCardDao().countDressInCart()) { rowCount ->
+            rowCount > 0
+        }
+    }
+
+    override fun countDressInCart(): LiveData<Int> {
+        return dressDatabase.dressInCardDao().countDressInCart()
     }
 
     override fun addProfile(login: String?, password: String?) {
