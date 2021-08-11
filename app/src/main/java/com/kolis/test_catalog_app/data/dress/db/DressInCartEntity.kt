@@ -22,6 +22,7 @@ data class DressInCartEntity(
     val category: String,
     val material: String,
     val country: String,
+    val photoUrl: String,
     val amount: Int,
     val size: DressSize,
     val color: String
@@ -45,6 +46,7 @@ data class DressInCartEntity(
                 _dressModel.dressModel.category,
                 _dressModel.dressModel.material,
                 _dressModel.dressModel.country,
+                _dressModel.dressModel.photoUrl,
                 _dressModel.quantity,
                 _dressModel.size,
                 _dressModel.color

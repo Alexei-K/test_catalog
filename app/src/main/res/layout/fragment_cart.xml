@@ -14,7 +14,7 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/grey_rounded_background_big_corners"
         android:orientation="vertical"
-        android:paddingVertical="10dp"
+        android:paddingTop="15dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@id/buyLayout"
         app:layout_constraintEnd_toEndOf="parent"

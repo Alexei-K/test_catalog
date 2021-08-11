@@ -9,6 +9,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
 import com.kolis.test_catalog_app.R
 import com.kolis.test_catalog_app.data.DressModel
 import com.kolis.test_catalog_app.data.DressSize
@@ -43,12 +44,11 @@ class WatchDressFragment : Fragment() {
     }
 
     private fun fillData() {
-        dressImage.setImageDrawable(
-            ResourcesCompat.getDrawable(
-                dressImage.resources,
-                dressModel.getTestImageResource(), null
-            )
-        )
+        
+        Glide.with(dressImage.context)
+            .load(dressModel.photoUrl)
+            .into(dressImage)
+
         productName.text = dressModel.name
         setUpDiscountPrice()
         numberOfMarks.text = "(" + dressModel.numberOfVotes.toInt() + ")"

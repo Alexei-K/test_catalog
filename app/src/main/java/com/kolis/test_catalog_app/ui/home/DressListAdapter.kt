@@ -13,6 +13,9 @@ import com.kolis.test_catalog_app.R
 import android.widget.TextView
 import android.widget.RatingBar
 import androidx.core.content.res.ResourcesCompat
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.Target.SIZE_ORIGINAL
+import com.kolis.test_catalog_app.util.dpToPx
 import com.kolis.test_catalog_app.util.toDollars
 import java.util.*
 
@@ -38,22 +41,19 @@ class DressListAdapter : RecyclerView.Adapter<DressViewHolder>() {
 
     inner class DressViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var pictureIV: ImageView = itemView.findViewById(R.id.product_photo)
-        var isLikedIV: ImageView= itemView.findViewById(R.id.likePhoto)
-        var productNameTV: TextView= itemView.findViewById(R.id.productName)
-        var newPriceTV: TextView= itemView.findViewById(R.id.priceActual)
-        var oldPriceTV: TextView= itemView.findViewById(R.id.priceOld)
-        var numberOfVotesTV: TextView= itemView.findViewById(R.id.numberOfMarks)
-        var timeRemainingTV: TextView= itemView.findViewById(R.id.timeRemaining)
-        var ratingBar: RatingBar= itemView.findViewById(R.id.rating)
+        var isLikedIV: ImageView = itemView.findViewById(R.id.likePhoto)
+        var productNameTV: TextView = itemView.findViewById(R.id.productName)
+        var newPriceTV: TextView = itemView.findViewById(R.id.priceActual)
+        var oldPriceTV: TextView = itemView.findViewById(R.id.priceOld)
+        var numberOfVotesTV: TextView = itemView.findViewById(R.id.numberOfMarks)
+        var timeRemainingTV: TextView = itemView.findViewById(R.id.timeRemaining)
+        var ratingBar: RatingBar = itemView.findViewById(R.id.rating)
 
         fun bind(model: DressModel) {
-            //заглушка. Фото не отправляется на сервер и не получается с сервера.
-            pictureIV.setImageDrawable(
-                ResourcesCompat.getDrawable(
-                    itemView.resources,
-                    model.getTestImageResource(), null
-                )
-            )
+            Glide.with(pictureIV.context)
+                .load(model.photoUrl)
+                .override(300f.dpToPx(pictureIV.context), SIZE_ORIGINAL)
+                .into(pictureIV)
 
             isLikedIV.setImageDrawable(
                 ResourcesCompat.getDrawable(

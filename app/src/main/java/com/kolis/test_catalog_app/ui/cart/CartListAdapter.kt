@@ -9,6 +9,7 @@ import com.kolis.test_catalog_app.R
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
+import com.bumptech.glide.Glide
 import com.kolis.test_catalog_app.data.dress.DressInCartModel
 import com.kolis.test_catalog_app.data.dress.DressRepository
 import com.kolis.test_catalog_app.data.dress.DressRepositoryType
@@ -45,13 +46,9 @@ class CartListAdapter(private val dressRepository: DressRepositoryType) : Recycl
         var remove: ImageView = itemView.findViewById(R.id.remove)
 
         fun bind(model: DressInCartModel) {
-            //TODO заглушка. Фото не отправляется на сервер и не получается с сервера.
-            image.setImageDrawable(
-                ResourcesCompat.getDrawable(
-                    itemView.resources,
-                    model.dressModel.getTestImageResource(), null
-                )
-            )
+            Glide.with(image.context)
+                .load(model.dressModel.photoUrl)
+                .into(image)
 
             name.text = model.dressModel.name
             secondaryInfo.text = itemView.resources.getString(R.string.color_size, model.color, model.size)

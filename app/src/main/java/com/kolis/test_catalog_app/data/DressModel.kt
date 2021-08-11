@@ -21,7 +21,8 @@ data class DressModel(
     val productCode: String,
     val category: String,
     val material: String,
-    val country: String
+    val country: String,
+    val photoUrl: String = "https://cdn.shopify.com/s/files/1/0072/4588/9618/products/EP07516GY-L_9b448d29-63fb-4f56-b508-15d3dc3c90a0_600x.jpg?v=1596524263"
 ) : Parcelable {
 
     companion object {
