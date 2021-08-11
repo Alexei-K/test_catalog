@@ -75,5 +75,7 @@ dependencies {
     // ROOM DATABASE
     def room_version = "2.3.0"
     implementation "androidx.room:room-runtime:$room_version"
+    //to make room dao functions suspended
+    implementation "androidx.room:room-ktx:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 }

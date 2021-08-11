@@ -7,11 +7,15 @@ import android.view.View
 import android.widget.ImageView
 import com.kolis.test_catalog_app.R
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import com.kolis.test_catalog_app.data.dress.DressInCartModel
+import com.kolis.test_catalog_app.data.dress.DressRepository
+import com.kolis.test_catalog_app.data.dress.DressRepositoryType
+import com.kolis.test_catalog_app.util.toDollars
 import java.util.*
 
-class CartListAdapter : RecyclerView.Adapter<CartListAdapter.CartItemViewHolder>() {
+class CartListAdapter(private val dressRepository: DressRepositoryType) : RecyclerView.Adapter<CartListAdapter.CartItemViewHolder>() {
     private var dressList = mutableListOf<DressInCartModel>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartItemViewHolder {
@@ -37,6 +41,8 @@ class CartListAdapter : RecyclerView.Adapter<CartListAdapter.CartItemViewHolder>
         var secondaryInfo: TextView = itemView.findViewById(R.id.secondaryInfo)
         var price: TextView = itemView.findViewById(R.id.price)
         var amount: TextView = itemView.findViewById(R.id.amount)
+        var add: ImageView = itemView.findViewById(R.id.add)
+        var remove: ImageView = itemView.findViewById(R.id.remove)
 
         fun bind(model: DressInCartModel) {
             //TODO заглушка. Фото не отправляется на сервер и не получается с сервера.
@@ -49,9 +55,28 @@ class CartListAdapter : RecyclerView.Adapter<CartListAdapter.CartItemViewHolder>
 
             name.text = model.dressModel.name
             secondaryInfo.text = itemView.resources.getString(R.string.color_size, model.color, model.size)
-            //TODO create money util
-            price.text = "$ " + String.format(Locale.US, "%.2f", model.dressModel.newPrice)
+            price.text = model.dressModel.newPrice.toDollars()
             amount.text = model.quantity.toString()
+
+            add.setOnClickListener {
+                dressRepository.addDressToCart(model.also {
+                    it.quantity++
+                })
+            }
+
+            remove.setOnClickListener {
+                model.quantity--
+                if (model.quantity == 0) {
+                    dressRepository.removeFromCart(model)
+                    Toast.makeText(
+                        remove.context,
+                        remove.resources.getString(R.string.removed_from_cart, model.dressModel.name.capitalize()),
+                        Toast.LENGTH_LONG
+                    ).show()
+                } else {
+                    dressRepository.addDressToCart(model)
+                }
+            }
         }
     }
 }

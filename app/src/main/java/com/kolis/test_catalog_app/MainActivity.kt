@@ -17,11 +17,17 @@ import com.kolis.test_catalog_app.util.PrefConstants
 
 class MainActivity : AppCompatActivity() {
 
+    companion object {
+        //TODO remove after implementing DAGGER or Koin
+        var appContext: Context? = null
+    }
+
     lateinit var navView: BottomNavigationView
 
     lateinit var dressRepository: DressRepositoryType
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        appContext = applicationContext
         checkIfLoggedIn()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

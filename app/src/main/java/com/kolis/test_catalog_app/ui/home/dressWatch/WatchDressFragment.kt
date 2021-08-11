@@ -14,6 +14,7 @@ import com.kolis.test_catalog_app.data.DressModel
 import com.kolis.test_catalog_app.data.DressSize
 import com.kolis.test_catalog_app.data.dress.DressInCartModel
 import com.kolis.test_catalog_app.data.dress.DressRepository
+import com.kolis.test_catalog_app.util.toDollars
 import kotlinx.android.synthetic.main.fragment_watch_dress.*
 import java.util.*
 
@@ -70,22 +71,14 @@ class WatchDressFragment : Fragment() {
 
     private fun setUpDiscountPrice() {
         if (dressModel.newPrice >= dressModel.oldPrice) {
-            priceActual.text = getMoneyFormated(dressModel.newPrice)
+            priceActual.text = dressModel.newPrice.toDollars()
             priceOld.visibility = View.INVISIBLE
         } else {
-            priceActual.text = getMoneyFormated(dressModel.newPrice)
-            priceOld.text = getMoneyFormated(dressModel.oldPrice)
+            priceActual.text = dressModel.newPrice.toDollars()
+            priceOld.text = dressModel.oldPrice.toDollars()
             priceOld.paintFlags = priceOld.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
             priceOld.visibility = View.VISIBLE
         }
-    }
-
-    private fun getMoneyFormated(amount: Float): String {
-        return "$ " + String.format(
-            Locale.US,
-            "%.2f",
-            amount
-        )
     }
 
     private fun initListeners() {
@@ -96,6 +89,7 @@ class WatchDressFragment : Fragment() {
         addToCart.setOnClickListener {
             viewModel.addToCart(
                 DressInCartModel(
+                    0L,
                     dressModel,
                     (addToCartQuantity.selectedItem as String).toInt(),
                     DressSize.byName(sizeSpinner.selectedItem.toString()),

@@ -29,31 +29,32 @@ data class DressInCartEntity(
     companion object {
         const val TABLE_NAME = "DressInCard"
 
-        fun fromModel(dressModel: DressInCartModel): DressInCartEntity {
+        fun fromModel(_dressModel: DressInCartModel): DressInCartEntity {
             return DressInCartEntity(
-                0L,
-                dressModel.dressModel.id,
-                dressModel.dressModel.name,
-                dressModel.dressModel.oldPrice,
-                dressModel.dressModel.newPrice,
-                dressModel.dressModel.isLiked,
-                dressModel.dressModel.overallRating,
-                dressModel.dressModel.numberOfVotes,
-                dressModel.dressModel.timeTill,
-                dressModel.dressModel.description,
-                dressModel.dressModel.productCode,
-                dressModel.dressModel.category,
-                dressModel.dressModel.material,
-                dressModel.dressModel.country,
-                dressModel.quantity,
-                dressModel.size,
-                dressModel.color
+                _dressModel.id,
+                _dressModel.dressModel.id,
+                _dressModel.dressModel.name,
+                _dressModel.dressModel.oldPrice,
+                _dressModel.dressModel.newPrice,
+                _dressModel.dressModel.isLiked,
+                _dressModel.dressModel.overallRating,
+                _dressModel.dressModel.numberOfVotes,
+                _dressModel.dressModel.timeTill,
+                _dressModel.dressModel.description,
+                _dressModel.dressModel.productCode,
+                _dressModel.dressModel.category,
+                _dressModel.dressModel.material,
+                _dressModel.dressModel.country,
+                _dressModel.quantity,
+                _dressModel.size,
+                _dressModel.color
             )
         }
     }
 
     fun toModel(): DressInCartModel {
         return DressInCartModel(
+            buyItemId,
             DressModel(
                 dressId, name, oldPrice, newPrice, isLiked, overallRating, numberOfVotes, timeTill,
                 //TODO implement saving lists to Room DB
@@ -63,6 +64,7 @@ data class DressInCartEntity(
             quantity,
             size,
             color
+
         )
     }
 }

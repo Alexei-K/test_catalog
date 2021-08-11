@@ -13,6 +13,7 @@ import com.kolis.test_catalog_app.R
 import android.widget.TextView
 import android.widget.RatingBar
 import androidx.core.content.res.ResourcesCompat
+import com.kolis.test_catalog_app.util.toDollars
 import java.util.*
 
 class DressListAdapter : RecyclerView.Adapter<DressViewHolder>() {
@@ -74,12 +75,12 @@ class DressListAdapter : RecyclerView.Adapter<DressViewHolder>() {
             productNameTV.text = model.name
 
             if (model.newPrice >= model.oldPrice) {
-                newPriceTV.text = "$ " + String.format(Locale.US, "%.2f", model.newPrice)
+                newPriceTV.text = model.newPrice.toDollars()
                 oldPriceTV.visibility = View.INVISIBLE
                 timeRemainingTV.visibility = View.GONE
             } else {
-                newPriceTV.text = "$ " + String.format(Locale.US, "%.2f", model.newPrice)
-                oldPriceTV.text = "$ " + String.format(Locale.US, "%.2f", model.oldPrice)
+                newPriceTV.text = model.newPrice.toDollars()
+                oldPriceTV.text = model.oldPrice.toDollars()
                 oldPriceTV.paintFlags = oldPriceTV.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
                 oldPriceTV.visibility = View.VISIBLE
                 if (model.timeTill > System.currentTimeMillis()) {

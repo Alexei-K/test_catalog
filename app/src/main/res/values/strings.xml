@@ -30,8 +30,8 @@
     <string name="work_in_progress">We are working on this feature.</string>
 
     <!-- Card fragment-->
-
-    <string name="color_size">Color - %1$s, size - %2$s</string>
+    <string name="color_size">Color - %1$s,\nSize - %2$s</string>
+    <string name="removed_from_cart">%1$s was removed from the cart.</string>
 
     <string name="leave_profile">Leave profile</string>
 

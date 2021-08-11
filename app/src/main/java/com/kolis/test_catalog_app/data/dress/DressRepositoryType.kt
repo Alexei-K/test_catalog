@@ -11,7 +11,8 @@ interface DressRepositoryType {
     val allDressesLD: LiveData<List<DressModel>>
 
     //Cart data
-    suspend fun addDressToCart(dress: DressInCartModel)
+    fun addDressToCart(dress: DressInCartModel)
+    fun removeFromCart(dress: DressInCartModel)
     fun isAnyDressInCart(): LiveData<Boolean>
     fun countDressInCart(): LiveData<Int>
     fun dressesInCart(): LiveData<List<DressInCartModel>>

@@ -11,10 +11,11 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class DressInCartModel(
+    val id: Long = 0L,
     val dressModel: DressModel,
-    val quantity: Int,
+    var quantity: Int,
     val size: DressSize,
-    val color: String
+    val color: String,
 ) : Parcelable {
 
 }

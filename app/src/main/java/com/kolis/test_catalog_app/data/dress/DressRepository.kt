@@ -14,6 +14,10 @@ import com.google.firebase.firestore.QuerySnapshot
 import com.kolis.test_catalog_app.data.dress.db.DressDatabase
 import com.kolis.test_catalog_app.data.dress.db.DressInCartEntity
 import com.kolis.test_catalog_app.ui.login.OnPasswordCheckObserver
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.lang.Exception
 import java.util.*
 
@@ -59,9 +63,17 @@ class DressRepository(context: Context) : DressRepositoryType {
             return allDresses()
         }
 
-    override suspend fun addDressToCart(dress: DressInCartModel) {
-        val id = dressDatabase.dressInCardDao().addItemInCard(DressInCartEntity.fromModel(dress))
-        Log.d("AlexLog", "Item with id $id added to cart")
+    override fun addDressToCart(dress: DressInCartModel) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val id = dressDatabase.dressInCardDao().addItemInCard(DressInCartEntity.fromModel(dress))
+            Log.d("AlexLog", "Item with id $id added to cart")
+        }
+    }
+
+    override fun removeFromCart(dress: DressInCartModel) {
+        CoroutineScope(Dispatchers.IO).launch {
+            dressDatabase.dressInCardDao().removeFromCart(DressInCartEntity.fromModel(dress))
+        }
     }
 
     override fun isAnyDressInCart(): LiveData<Boolean> {
