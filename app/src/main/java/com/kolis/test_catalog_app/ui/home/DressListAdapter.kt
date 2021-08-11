@@ -19,7 +19,7 @@ class DressListAdapter : RecyclerView.Adapter<DressViewHolder>() {
     private var dressList = mutableListOf<DressModel>()
     lateinit var controller: NavController
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DressViewHolder {
-        return DressViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.product_item_view, parent, false))
+        return DressViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_product, parent, false))
     }
 
     override fun onBindViewHolder(holder: DressViewHolder, position: Int) {

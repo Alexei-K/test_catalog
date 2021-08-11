@@ -29,12 +29,9 @@ class DressRepository(context: Context) : DressRepositoryType {
 
     private var dressDatabase = DressDatabase.getInstance(context)
     private val _allDresses = MutableLiveData<List<DressModel>>()
+
     private fun allDresses(): LiveData<List<DressModel>> {
         return _allDresses
-    }
-
-    init {
-
     }
 
     override fun addDress(model: DressModel?) {
@@ -75,6 +72,14 @@ class DressRepository(context: Context) : DressRepositoryType {
 
     override fun countDressInCart(): LiveData<Int> {
         return dressDatabase.dressInCardDao().countDressInCart()
+    }
+
+    override fun dressesInCart(): LiveData<List<DressInCartModel>> {
+        return Transformations.map(dressDatabase.dressInCardDao().dressesInCart()) { entityList ->
+            entityList.map { entity ->
+                entity.toModel()
+            }
+        }
     }
 
     override fun addProfile(login: String?, password: String?) {

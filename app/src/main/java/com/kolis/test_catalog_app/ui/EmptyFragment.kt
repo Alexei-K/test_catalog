@@ -9,7 +9,6 @@ import com.kolis.test_catalog_app.R
 
 class EmptyFragment : Fragment() {
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

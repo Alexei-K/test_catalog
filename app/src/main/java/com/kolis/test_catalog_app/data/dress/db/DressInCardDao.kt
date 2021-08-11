@@ -20,4 +20,6 @@ interface DressInCardDao {
     @Query(value = "SELECT COUNT(*) FROM ${DressInCartEntity.TABLE_NAME}")
     fun countDressInCart(): LiveData<Int>
 
+    @Query(value = "SELECT * FROM ${DressInCartEntity.TABLE_NAME}")
+    fun dressesInCart(): LiveData<List<DressInCartEntity>>
 }

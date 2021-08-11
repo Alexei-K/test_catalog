@@ -10,10 +10,13 @@ interface DressRepositoryType {
 
     val allDressesLD: LiveData<List<DressModel>>
 
+    //Cart data
     suspend fun addDressToCart(dress: DressInCartModel)
     fun isAnyDressInCart(): LiveData<Boolean>
     fun countDressInCart(): LiveData<Int>
+    fun dressesInCart(): LiveData<List<DressInCartModel>>
 
+    //TODO Remove later
     fun addProfile(login: String?, password: String?)
     fun isPasswordRight(login: String?, password: String?, observer: OnPasswordCheckObserver)
 }

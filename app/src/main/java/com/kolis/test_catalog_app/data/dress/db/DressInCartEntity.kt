@@ -2,6 +2,7 @@ package com.kolis.test_catalog_app.data.dress.db
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.kolis.test_catalog_app.data.DressModel
 import com.kolis.test_catalog_app.data.DressSize
 import com.kolis.test_catalog_app.data.dress.DressInCartModel
 
@@ -49,5 +50,19 @@ data class DressInCartEntity(
                 dressModel.color
             )
         }
+    }
+
+    fun toModel(): DressInCartModel {
+        return DressInCartModel(
+            DressModel(
+                dressId, name, oldPrice, newPrice, isLiked, overallRating, numberOfVotes, timeTill,
+                //TODO implement saving lists to Room DB
+                mutableListOf(), mutableListOf(),
+                description, productCode, category, material, country
+            ),
+            quantity,
+            size,
+            color
+        )
     }
 }

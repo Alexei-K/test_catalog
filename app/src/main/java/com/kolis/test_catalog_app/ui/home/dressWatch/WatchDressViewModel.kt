@@ -8,9 +8,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class WatchDressViewModel(_dressRepository: DressRepositoryType) : ViewModel() {
+class WatchDressViewModel( private val dressRepository: DressRepositoryType) : ViewModel() {
 
-    private val dressRepository: DressRepositoryType = _dressRepository
     fun addToCart(dressModel: DressInCartModel) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
