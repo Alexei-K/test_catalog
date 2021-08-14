@@ -15,6 +15,7 @@ import com.kolis.test_catalog_app.data.DressModel
 import com.kolis.test_catalog_app.data.DressSize
 import com.kolis.test_catalog_app.data.dress.DressInCartModel
 import com.kolis.test_catalog_app.data.dress.DressRepository
+import com.kolis.test_catalog_app.ui.utils.DefaultLoadingSpinner
 import com.kolis.test_catalog_app.util.toDollars
 import kotlinx.android.synthetic.main.fragment_watch_dress.*
 import java.util.*
@@ -47,6 +48,7 @@ class WatchDressFragment : Fragment() {
         
         Glide.with(dressImage.context)
             .load(dressModel.photoUrl)
+            .placeholder(DefaultLoadingSpinner(dressImage.context))
             .into(dressImage)
 
         productName.text = dressModel.name

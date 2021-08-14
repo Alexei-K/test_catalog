@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide
 import com.kolis.test_catalog_app.data.dress.DressInCartModel
 import com.kolis.test_catalog_app.data.dress.DressRepository
 import com.kolis.test_catalog_app.data.dress.DressRepositoryType
+import com.kolis.test_catalog_app.ui.utils.DefaultLoadingSpinner
 import com.kolis.test_catalog_app.util.toDollars
 import java.util.*
 
@@ -48,6 +49,7 @@ class CartListAdapter(private val dressRepository: DressRepositoryType) : Recycl
         fun bind(model: DressInCartModel) {
             Glide.with(image.context)
                 .load(model.dressModel.photoUrl)
+                .placeholder(DefaultLoadingSpinner(image.context))
                 .into(image)
 
             name.text = model.dressModel.name

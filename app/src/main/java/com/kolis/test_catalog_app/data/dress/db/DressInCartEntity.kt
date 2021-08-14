@@ -61,7 +61,7 @@ data class DressInCartEntity(
                 dressId, name, oldPrice, newPrice, isLiked, overallRating, numberOfVotes, timeTill,
                 //TODO implement saving lists to Room DB
                 mutableListOf(), mutableListOf(),
-                description, productCode, category, material, country
+                description, productCode, category, material, country, photoUrl
             ),
             amount,
             size,

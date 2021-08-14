@@ -44,17 +44,17 @@ data class DressModel(
             DressModel(
                 0, "Scaridian dress", 100.00f, 50.00f, false, 80, 83, 1602798596177,
                 DressSize.allSizes, sampleColors,
-                sampleDesription, "578902-00", "Sweater", "Cotton", "Spain"
+                sampleDesription, "578902-00", "Sweater", "Cotton", "Spain", "https://www.sinsay.com/media/catalog/product/cache/1200/a4e40ebdc3e371adff845072e1c73f37/7/3/7398C-76X-001_2.jpg"
             ),
             DressModel(
                 1, "Wool dress", 200.00f, 180.00f, false, 100, 12, 1602885996177,
                 DressSize.allSizes, sampleColors,
-                sampleDesription, "578902-00", "Sweater", "Cotton", "China"
+                sampleDesription, "578902-00", "Sweater", "Cotton", "China", "https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1543425635-jcrew-1543425624.jpg?crop=1xw:1xh;center,top&resize=480:*"
             ),
             DressModel(
                 2, "Cream cotton dress", 150.00f, 100.00f, true, 120, 28, 1602962396177,
                 DressSize.allSizes, sampleColors,
-                sampleDesription, "578902-00", "Sweater", "Cotton", "Ukraine"
+                sampleDesription, "578902-00", "Sweater", "Cotton", "Ukraine", "https://www.kwabey.com/uploads/products/469/469-1619177422-944065-4.jpg"
             ),
             DressModel(
                 3, "Black dress", 120.00f, 120.00f, true, 2, 1, 7,
@@ -64,7 +64,7 @@ data class DressModel(
             DressModel(
                 4, "Scaridian dress", 120.00f, 50.00f, false, 40, 24, 7,
                 DressSize.allSizes, sampleColors,
-                sampleDesription, "578902-00", "Sweater", "Cotton", "Spain"
+                sampleDesription, "578902-00", "Sweater", "Cotton", "Spain", "https://www.kwabey.com/uploads/products/469/469-1619177422-944065-4.jpg"
             ),
             DressModel(
                 5, "Black dress", 1000.00f, 250.00f, true, 45, 12, 7,
@@ -118,6 +118,7 @@ data class DressModel(
         val CATEGORY_CODE: String = "category"
         val MATERIAL_CODE: String = "material"
         val COUNTRY_CODE: String = "country"
+        val PHOTO_URL: String = "photo_url"
 
         fun fromFirebaseDocument(document: QueryDocumentSnapshot): DressModel {
             return DressModel(
@@ -135,7 +136,8 @@ data class DressModel(
                 document[PRODUCT_CODE_CODE] as String,
                 document[CATEGORY_CODE] as String,
                 document[MATERIAL_CODE] as String,
-                document[COUNTRY_CODE] as String
+                document[COUNTRY_CODE] as String,
+                document[PHOTO_URL] as String
             )
         }
 
@@ -182,7 +184,8 @@ data class DressModel(
             PRODUCT_CODE_CODE to productCode,
             CATEGORY_CODE to category,
             MATERIAL_CODE to material,
-            COUNTRY_CODE to country
+            COUNTRY_CODE to country,
+            PHOTO_URL to photoUrl
         )
     }
 }

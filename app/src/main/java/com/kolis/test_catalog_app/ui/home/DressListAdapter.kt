@@ -1,6 +1,8 @@
 package com.kolis.test_catalog_app.ui.home
 
 import android.graphics.Paint
+import android.graphics.drawable.Drawable
+import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import com.kolis.test_catalog_app.ui.home.DressListAdapter.DressViewHolder
 import com.kolis.test_catalog_app.data.DressModel
@@ -13,11 +15,15 @@ import com.kolis.test_catalog_app.R
 import android.widget.TextView
 import android.widget.RatingBar
 import androidx.core.content.res.ResourcesCompat
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.Target.SIZE_ORIGINAL
-import com.kolis.test_catalog_app.util.dpToPx
+import com.bumptech.glide.annotation.GlideModule
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.module.AppGlideModule
+import com.bumptech.glide.request.RequestListener
+import com.kolis.test_catalog_app.ui.utils.DefaultLoadingSpinner
 import com.kolis.test_catalog_app.util.toDollars
-import java.util.*
 
 class DressListAdapter : RecyclerView.Adapter<DressViewHolder>() {
     private var dressList = mutableListOf<DressModel>()
@@ -50,9 +56,11 @@ class DressListAdapter : RecyclerView.Adapter<DressViewHolder>() {
         var ratingBar: RatingBar = itemView.findViewById(R.id.rating)
 
         fun bind(model: DressModel) {
+
             Glide.with(pictureIV.context)
                 .load(model.photoUrl)
-                .override(300f.dpToPx(pictureIV.context), SIZE_ORIGINAL)
+                .placeholder(DefaultLoadingSpinner(pictureIV.context))
+                .addListener(getLoadListener())
                 .into(pictureIV)
 
             isLikedIV.setImageDrawable(
@@ -102,6 +110,31 @@ class DressListAdapter : RecyclerView.Adapter<DressViewHolder>() {
             itemView.setOnClickListener { v: View? ->
                 val action = HomeFragmentDirections.actionNavigationHomeToNavigationWatchDress(model)
                 controller.navigate(action)
+            }
+
+        }
+
+        fun getLoadListener(): RequestListener<Drawable> = object : RequestListener<Drawable> {
+            override fun onLoadFailed(
+                e: GlideException?,
+                model: Any?,
+                target: com.bumptech.glide.request.target.Target<Drawable>?,
+                isFirstResource: Boolean
+            ): Boolean {
+                Log.e("TAG_ ", "Error loading image $e")
+                e?.printStackTrace()
+                return false
+            }
+
+            override fun onResourceReady(
+                resource: Drawable?,
+                model: Any?,
+                target: com.bumptech.glide.request.target.Target<Drawable>?,
+                dataSource: DataSource?,
+                isFirstResource: Boolean
+            ): Boolean {
+                Log.d("TAG_ ", "Image loaded successfully $resource")
+                return false
             }
         }
 
