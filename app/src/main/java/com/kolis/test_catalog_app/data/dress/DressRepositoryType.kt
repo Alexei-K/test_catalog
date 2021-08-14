@@ -14,6 +14,10 @@ interface DressRepositoryType {
     fun addDressToCart(dress: DressInCartModel)
     fun removeFromCart(dress: DressInCartModel)
     fun isAnyDressInCart(): LiveData<Boolean>
+
+    /**
+     * Returns amount of positions in cart (ex. 3 same T-shirts will return 1)
+     */
     fun countDressInCart(): LiveData<Int>
     fun dressesInCart(): LiveData<List<DressInCartModel>>
     fun totalCartPrice(): LiveData<Float>

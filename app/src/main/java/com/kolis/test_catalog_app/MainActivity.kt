@@ -52,10 +52,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun setupBadges() {
-        dressRepository.countDressInCart().observe(this@MainActivity) { count ->
+        dressRepository.dressesInCart().observe(this@MainActivity) { dresses ->
             val badge = navView.getOrCreateBadge(R.id.navigation_cart)
-            badge.isVisible = count > 0
-            badge.number = count
+            badge.isVisible = dresses.isNotEmpty()
+            badge.number = dresses.sumBy { it.quantity }
         }
     }
 }

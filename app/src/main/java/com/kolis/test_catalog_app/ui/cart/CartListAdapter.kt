@@ -54,7 +54,7 @@ class CartListAdapter(private val dressRepository: DressRepositoryType) : Recycl
 
             name.text = model.dressModel.name
             secondaryInfo.text = itemView.resources.getString(R.string.color_size, model.color, model.size)
-            price.text = model.dressModel.newPrice.toDollars()
+            price.text = (model.dressModel.newPrice * model.quantity).toDollars()
             amount.text = model.quantity.toString()
 
             add.setOnClickListener {
