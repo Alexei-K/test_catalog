@@ -1,78 +1,82 @@
-package com.kolis.test_catalog_app.ui.login;
+package com.kolis.test_catalog_app.ui.login
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.util.AttributeSet;
-import android.view.View;
+import android.content.Intent
+import android.os.Bundle
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentPagerAdapter
+import androidx.preference.PreferenceManager
+import androidx.viewpager.widget.ViewPager
+import com.google.android.material.tabs.TabLayout
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.kolis.test_catalog_app.Constants
+import com.kolis.test_catalog_app.MainActivity
+import com.kolis.test_catalog_app.R
+import com.kolis.test_catalog_app.data.dress.DressRepository
+import com.kolis.test_catalog_app.data.user.UserModel
+import com.kolis.test_catalog_app.util.PrefConstants
+import java.lang.Exception
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.preference.PreferenceManager;
-import androidx.viewpager.widget.ViewPager;
+class LoginActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-import com.google.android.material.tabs.TabLayout;
-import com.kolis.test_catalog_app.Constants;
-import com.kolis.test_catalog_app.MainActivity;
-import com.kolis.test_catalog_app.R;
-import com.kolis.test_catalog_app.util.PrefConstants;
-
-import static androidx.fragment.app.FragmentPagerAdapter.BEHAVIOR_SET_USER_VISIBLE_HINT;
-
-public class LoginActivity extends AppCompatActivity {
-
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        checkRegistration();
-        setContentView(R.layout.activity_register);
-        ViewPager pager = findViewById(R.id.register_viewPager);
-        TabLayout tabs = findViewById(R.id.register_tabs);
-        setUpAdapter(pager);
-        tabs.setupWithViewPager(pager);
+        registerLoginListener()
+        checkRegistration()
+        setContentView(R.layout.activity_register)
+        val pager = findViewById<ViewPager>(R.id.register_viewPager)
+        val tabs = findViewById<TabLayout>(R.id.register_tabs)
+        setUpAdapter(pager)
+        tabs.setupWithViewPager(pager)
     }
 
-    private void setUpAdapter(ViewPager pager) {
-        InfoTabsAdapter adapter = new InfoTabsAdapter(getSupportFragmentManager(), BEHAVIOR_SET_USER_VISIBLE_HINT);
-
-        StartInfoFragment firstFragment = new StartInfoFragment();
-        setFragmentBundle(firstFragment, R.drawable.registration_1,
-                getString(R.string.welcome_to_fluxstore), getString(R.string.register_screen_text));
-        adapter.addFragment(0, firstFragment);
-
-        StartInfoFragment secondFragment = new StartInfoFragment();
-        setFragmentBundle(secondFragment, R.drawable.registration_2,
-                getString(R.string.second_register_screen_title), getString(R.string.register_screen_text));
-        adapter.addFragment(1, secondFragment);
-
-        LoginFragment thirdFragment = new LoginFragment();
-        adapter.addFragment(2, thirdFragment);
-
-        pager.setAdapter(adapter);
-    }
-
-    private void setFragmentBundle(StartInfoFragment fragment, int imgId, String title, String text) {
-        Bundle bundle = new Bundle();
-        bundle.putInt(StartInfoFragment.INFO_IMAGE, imgId);
-        bundle.putString(StartInfoFragment.INFO_TITLE, title);
-        bundle.putString(StartInfoFragment.INFO_TEXT, text);
-        fragment.setArguments(bundle);
-    }
-
-    private void checkRegistration() {
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
-        if (pref.getBoolean(PrefConstants.IS_LOGGED_PREF, false) || !Constants.IS_LOGIN_REQUIRED) {
-            startActivity(new Intent(this, MainActivity.class));
-            finish();
+    private fun registerLoginListener() {
+        FirebaseAuth.getInstance().addAuthStateListener {
+            if (it.currentUser?.isAnonymous == false) {
+                FirebaseFirestore.getInstance().collection(Constants.USERS_PATH).document(it.uid!!).set(
+                    UserModel(
+                        it.uid!!,
+                        it.currentUser?.displayName!!,
+                        Constants.NEW_USER_IS_ADMIN
+                    )
+                ).addOnFailureListener { exception: Exception? -> Log.d(DressRepository.TAG, "User upload to firebase failed: ${exception?.message} ") }
+            }
         }
-
     }
 
-    @Nullable
-    @Override
-    public View onCreateView(@Nullable View parent, @NonNull String name, @NonNull Context context, @NonNull AttributeSet attrs) {
-        return super.onCreateView(parent, name, context, attrs);
+    private fun checkRegistration() {
+        val pref = PreferenceManager.getDefaultSharedPreferences(this)
+        if (pref.getBoolean(PrefConstants.IS_LOGGED_PREF, false) || !Constants.IS_LOGIN_REQUIRED) {
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }
+    }
+
+    private fun setUpAdapter(pager: ViewPager) {
+        val adapter = InfoTabsAdapter(supportFragmentManager, FragmentPagerAdapter.BEHAVIOR_SET_USER_VISIBLE_HINT)
+        val firstFragment = StartInfoFragment()
+        setFragmentBundle(
+            firstFragment, R.drawable.registration_1,
+            getString(R.string.welcome_to_fluxstore), getString(R.string.register_screen_text)
+        )
+        adapter.addFragment(0, firstFragment)
+        val secondFragment = StartInfoFragment()
+        setFragmentBundle(
+            secondFragment, R.drawable.registration_2,
+            getString(R.string.second_register_screen_title), getString(R.string.register_screen_text)
+        )
+        adapter.addFragment(1, secondFragment)
+        val thirdFragment = LoginFragment()
+        adapter.addFragment(2, thirdFragment)
+        pager.adapter = adapter
+    }
+
+    private fun setFragmentBundle(fragment: StartInfoFragment, imgId: Int, title: String, text: String) {
+        val bundle = Bundle()
+        bundle.putInt(StartInfoFragment.INFO_IMAGE, imgId)
+        bundle.putString(StartInfoFragment.INFO_TITLE, title)
+        bundle.putString(StartInfoFragment.INFO_TEXT, text)
+        fragment.arguments = bundle
     }
 }

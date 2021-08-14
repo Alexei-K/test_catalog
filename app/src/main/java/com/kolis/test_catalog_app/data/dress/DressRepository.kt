@@ -51,7 +51,6 @@ class DressRepository(context: Context) : DressRepositoryType {
                     if (task.isSuccessful) {
                         val dressModels = ArrayList<DressModel>()
                         for (document in task.result!!) {
-//                            Log.d(TAG, document.id + " => " + document.data)
                             dressModels.add(fromFirebaseDocument(document))
                         }
                         _allDresses.postValue(dressModels)
