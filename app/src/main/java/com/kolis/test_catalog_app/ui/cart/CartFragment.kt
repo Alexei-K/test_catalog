@@ -11,12 +11,12 @@ import com.kolis.test_catalog_app.R
 import com.kolis.test_catalog_app.data.dress.DressRepository
 import com.kolis.test_catalog_app.databinding.FragmentCartBinding
 import com.kolis.test_catalog_app.util.toDollars
-import kotlinx.android.synthetic.main.fragment_cart.*
 
 class CartFragment : Fragment() {
 
     private var _binding: FragmentCartBinding? = null
-    private val binding get() = _binding!!
+    private val binding
+        get() = _binding!!
     private val repository = DressRepository(MainActivity.appContext!!)
     private val adapter: CartListAdapter = CartListAdapter(repository)
 
@@ -36,10 +36,10 @@ class CartFragment : Fragment() {
             adapter.setModelsList(it)
         }
 
-        binding.cartRecycler.adapter = adapter
-
         cartViewModel.getTotalCartPrice().observe(viewLifecycleOwner) { totalPrice ->
             binding.totalPrice.text = resources.getString(R.string.total_price, totalPrice.toDollars())
         }
+
+        binding.cartRecycler.adapter = adapter
     }
 }

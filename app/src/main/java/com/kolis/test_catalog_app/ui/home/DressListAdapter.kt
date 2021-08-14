@@ -10,34 +10,30 @@ import androidx.navigation.NavController
 import android.view.ViewGroup
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.ImageView
+import android.widget.*
 import com.kolis.test_catalog_app.R
-import android.widget.TextView
-import android.widget.RatingBar
 import androidx.core.content.res.ResourcesCompat
-import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
-import com.bumptech.glide.annotation.GlideModule
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.module.AppGlideModule
 import com.bumptech.glide.request.RequestListener
 import com.kolis.test_catalog_app.ui.utils.DefaultLoadingSpinner
 import com.kolis.test_catalog_app.util.toDollars
 
-class DressListAdapter : RecyclerView.Adapter<DressViewHolder>() {
+class DressListAdapter : RecyclerView.Adapter<DressViewHolder>(), Filterable {
     private var dressList = mutableListOf<DressModel>()
+    private var filteredDressList = mutableListOf<DressModel>()
     lateinit var controller: NavController
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DressViewHolder {
         return DressViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_product, parent, false))
     }
 
     override fun onBindViewHolder(holder: DressViewHolder, position: Int) {
-        holder.bind(dressList[position])
+        holder.bind(filteredDressList[position])
     }
 
     override fun getItemCount(): Int {
-        return dressList.size
+        return filteredDressList.size
     }
 
     fun setModelsList(modelList: List<DressModel>) {
@@ -75,7 +71,8 @@ class DressListAdapter : RecyclerView.Adapter<DressViewHolder>() {
                 isLikedIV.setImageDrawable(
                     ResourcesCompat.getDrawable(
                         itemView.resources,
-                        if (model.isLiked) R.drawable.like else R.drawable.dislike, null
+                        if (model.isLiked) R.drawable.like else R.drawable.dislike,
+                        null
                     )
                 )
             }
@@ -114,7 +111,7 @@ class DressListAdapter : RecyclerView.Adapter<DressViewHolder>() {
 
         }
 
-        fun getLoadListener(): RequestListener<Drawable> = object : RequestListener<Drawable> {
+        private fun getLoadListener(): RequestListener<Drawable> = object : RequestListener<Drawable> {
             override fun onLoadFailed(
                 e: GlideException?,
                 model: Any?,
@@ -155,6 +152,34 @@ class DressListAdapter : RecyclerView.Adapter<DressViewHolder>() {
                 R.string.time_remain_zero_days,
                 hours.toInt(), minutes.toInt()
             )
+        }
+    }
+
+    override fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(constraint: CharSequence?): FilterResults {
+                constraint ?: return FilterResults().also {
+                    it.values = mutableListOf<DressModel>()
+                }
+
+                if (constraint.trim().isEmpty()) {
+                    return FilterResults().also {
+                        it.values = dressList
+                    }
+                }
+
+                return FilterResults().also { result ->
+                    result.values = dressList.filter { dress ->
+                        dress.contains(constraint)
+                    }.toMutableList()
+                }
+            }
+
+            @Suppress("UNCHECKED_CAST")
+            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+                filteredDressList = results?.values as MutableList<DressModel>
+                notifyDataSetChanged()
+            }
         }
     }
 }

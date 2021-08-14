@@ -2,8 +2,10 @@ package com.kolis.test_catalog_app.data
 
 import android.os.Parcelable
 import com.google.firebase.firestore.QueryDocumentSnapshot
-import com.kolis.test_catalog_app.R
 import kotlinx.android.parcel.Parcelize
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 @Parcelize
 data class DressModel(
@@ -153,18 +155,6 @@ data class DressModel(
 
     fun getAvgMark(): Float = overallRating.toFloat() / numberOfVotes.toFloat()
 
-    // For testing purpose
-    fun getTestImageResource(): Int {
-        return when (id % 4) {
-            0L -> R.drawable.image_test
-            1L -> R.drawable.image_test2
-            2L -> R.drawable.image_test3
-            3L -> R.drawable.image_test4
-            else -> R.drawable.image_test4
-        }
-
-    }
-
     /**
      *Mapper for Firebase Cloud Firestore
      */
@@ -187,5 +177,13 @@ data class DressModel(
             COUNTRY_CODE to country,
             PHOTO_URL to photoUrl
         )
+    }
+
+    fun contains(_text: CharSequence): Boolean {
+        val text = _text.toString().toLowerCase(Locale.ROOT)
+        return name.toLowerCase(Locale.ROOT).contains(text)
+                || country.toLowerCase(Locale.ROOT).contains(text)
+                || description.toLowerCase(Locale.ROOT).contains(text)
+                || material.toLowerCase(Locale.ROOT).contains(text)
     }
 }
