@@ -32,13 +32,16 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun registerLoginListener() {
-        FirebaseAuth.getInstance().addAuthStateListener {
-            if (it.currentUser?.isAnonymous == false) {
-                FirebaseFirestore.getInstance().collection(Constants.USERS_PATH).document(it.uid!!).set(
+        FirebaseAuth.getInstance().addAuthStateListener { auth ->
+            if (auth.currentUser?.isAnonymous == false) {
+                FirebaseFirestore.getInstance().collection(Constants.USERS_PATH).document(auth.uid!!).set(
                     UserModel(
-                        it.uid!!,
-                        it.currentUser?.displayName!!,
-                        Constants.NEW_USER_IS_ADMIN
+                        auth.uid!!,
+                        auth.currentUser?.displayName!!,
+                        Constants.NEW_USER_IS_ADMIN,
+                        auth.currentUser?.email,
+                        auth.currentUser?.phoneNumber,
+                        auth.currentUser?.photoUrl?.toString(),
                     )
                 ).addOnFailureListener { exception: Exception? -> Log.d(DressRepository.TAG, "User upload to firebase failed: ${exception?.message} ") }
             }
