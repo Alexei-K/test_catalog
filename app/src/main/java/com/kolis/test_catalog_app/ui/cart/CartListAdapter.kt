@@ -8,14 +8,11 @@ import android.widget.ImageView
 import com.kolis.test_catalog_app.R
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.content.res.ResourcesCompat
 import com.bumptech.glide.Glide
 import com.kolis.test_catalog_app.data.dress.DressInCartModel
-import com.kolis.test_catalog_app.data.dress.DressRepository
 import com.kolis.test_catalog_app.data.dress.DressRepositoryType
 import com.kolis.test_catalog_app.ui.utils.DefaultLoadingSpinner
 import com.kolis.test_catalog_app.util.toDollars
-import java.util.*
 
 class CartListAdapter(private val dressRepository: DressRepositoryType) : RecyclerView.Adapter<CartListAdapter.CartItemViewHolder>() {
     private var dressList = mutableListOf<DressInCartModel>()

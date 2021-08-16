@@ -10,6 +10,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.QuerySnapshot
 import com.kolis.test_catalog_app.data.dress.db.DressDatabase
 import com.kolis.test_catalog_app.data.dress.db.DressInCartEntity
@@ -23,7 +24,7 @@ import java.util.*
 class DressRepository(context: Context) : DressRepositoryType {
 
     companion object {
-        private const val DRESS_COLLECTION_PATH = "dresses"
+        const val DRESS_COLLECTION_PATH = "dresses"
         private const val PROFILES_COLLECTION_PATH = "profiles_4578"
         var TAG = "firebase_debug"
     }
@@ -129,6 +130,19 @@ class DressRepository(context: Context) : DressRepositoryType {
                     Log.w(TAG, "Error getting data from firebase.", task.exception)
                 }
             }
+    }
+
+    override fun loadDresses(limit: Long, fromPage: DocumentSnapshot?): Task<QuerySnapshot> {
+        return if (fromPage != null) {
+            firebaseDatabase.collection(DRESS_COLLECTION_PATH)
+                .limit(limit)
+                .startAfter(fromPage)
+                .get()
+        } else {
+            firebaseDatabase.collection(DRESS_COLLECTION_PATH)
+                .limit(limit)
+                .get()
+        }
     }
 
     /**

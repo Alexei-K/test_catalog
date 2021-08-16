@@ -1,6 +1,9 @@
 package com.kolis.test_catalog_app.data.dress
 
 import androidx.lifecycle.LiveData
+import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.QuerySnapshot
 import com.kolis.test_catalog_app.data.DressModel
 import com.kolis.test_catalog_app.ui.login.OnPasswordCheckObserver
 import java.util.*
@@ -25,4 +28,6 @@ interface DressRepositoryType {
     //TODO Remove later
     fun addProfile(login: String?, password: String?)
     fun isPasswordRight(login: String?, password: String?, observer: OnPasswordCheckObserver)
+
+    fun loadDresses(limit: Long, fromPage: DocumentSnapshot?): Task<QuerySnapshot>
 }
