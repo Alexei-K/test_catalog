@@ -13,8 +13,9 @@ import com.kolis.test_catalog_app.data.dress.DressInCartModel
 import com.kolis.test_catalog_app.data.dress.DressRepositoryType
 import com.kolis.test_catalog_app.ui.utils.DefaultLoadingSpinner
 import com.kolis.test_catalog_app.util.toDollars
+import javax.inject.Inject
 
-class CartListAdapter(private val dressRepository: DressRepositoryType) : RecyclerView.Adapter<CartListAdapter.CartItemViewHolder>() {
+class CartListAdapter @Inject constructor(private val dressRepository: DressRepositoryType) : RecyclerView.Adapter<CartListAdapter.CartItemViewHolder>() {
     private var dressList = mutableListOf<DressInCartModel>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartItemViewHolder {

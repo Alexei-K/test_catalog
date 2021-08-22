@@ -1,33 +1,42 @@
 package com.kolis.test_catalog_app.ui.home.dressWatch
 
+import android.content.Context
 import android.graphics.Paint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.kolis.test_catalog_app.App
 import com.kolis.test_catalog_app.R
 import com.kolis.test_catalog_app.data.DressModel
 import com.kolis.test_catalog_app.data.DressSize
 import com.kolis.test_catalog_app.data.dress.DressInCartModel
-import com.kolis.test_catalog_app.data.dress.DressRepository
+import com.kolis.test_catalog_app.data.dress.DressRepositoryType
 import com.kolis.test_catalog_app.ui.utils.DefaultLoadingSpinner
 import com.kolis.test_catalog_app.util.toDollars
 import kotlinx.android.synthetic.main.fragment_watch_dress.*
-import java.util.*
+import javax.inject.Inject
 
 class WatchDressFragment : Fragment() {
 
+    @Inject
+    lateinit var repository: DressRepositoryType
+
     private val viewModel: WatchDressViewModel by viewModels {
-        WatchDressViewModelFactory(DressRepository(requireContext()))
+        WatchDressViewModelFactory(repository)
     }
 
     private val args: WatchDressFragmentArgs by navArgs()
     lateinit var dressModel: DressModel
+
+    override fun onAttach(context: Context) {
+        (requireActivity().application as App).appComponent.inject(this)
+        super.onAttach(context)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,7 +54,6 @@ class WatchDressFragment : Fragment() {
     }
 
     private fun fillData() {
-        
         Glide.with(dressImage.context)
             .load(dressModel.photoUrl)
             .placeholder(DefaultLoadingSpinner(dressImage.context))

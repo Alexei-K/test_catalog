@@ -14,20 +14,17 @@ import com.kolis.test_catalog_app.data.dress.DressRepository
 import com.kolis.test_catalog_app.data.dress.DressRepositoryType
 import com.kolis.test_catalog_app.ui.login.LoginActivity
 import com.kolis.test_catalog_app.util.PrefConstants
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
-    companion object {
-        //TODO remove after implementing DAGGER or Koin
-        var appContext: Context? = null
-    }
+    private lateinit var navView: BottomNavigationView
 
-    lateinit var navView: BottomNavigationView
-
+    @Inject
     lateinit var dressRepository: DressRepositoryType
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        appContext = applicationContext
+        (application as App).appComponent.inject(this)
         checkIfLoggedIn()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -38,7 +35,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
         val view = super.onCreateView(name, context, attrs)
-        dressRepository = DressRepository(this)
         setupBadges()
         return view
     }
@@ -51,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun setupBadges() {
+    private fun setupBadges() {
         dressRepository.dressesInCart().observe(this@MainActivity) { dresses ->
             val badge = navView.getOrCreateBadge(R.id.navigation_cart)
             badge.isVisible = dresses.isNotEmpty()

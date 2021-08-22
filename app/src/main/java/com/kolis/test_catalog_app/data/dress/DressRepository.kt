@@ -20,8 +20,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.lang.Exception
 import java.util.*
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class DressRepository(context: Context) : DressRepositoryType {
+@Singleton
+class DressRepository @Inject constructor(
+    val firebaseDatabase: FirebaseFirestore,
+    val dressDatabase: DressDatabase
+) : DressRepositoryType {
 
     companion object {
         const val DRESS_COLLECTION_PATH = "dresses"
@@ -29,9 +35,6 @@ class DressRepository(context: Context) : DressRepositoryType {
         var TAG = "firebase_debug"
     }
 
-    private var firebaseDatabase = FirebaseFirestore.getInstance()
-
-    private var dressDatabase = DressDatabase.getInstance(context)
     private val _allDresses = MutableLiveData<List<DressModel>>()
 
     private fun allDresses(): LiveData<List<DressModel>> {

@@ -1,5 +1,6 @@
 package com.kolis.test_catalog_app.ui.home
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,13 +10,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
-import com.kolis.test_catalog_app.MainActivity
-import com.kolis.test_catalog_app.data.dress.DressRepository
+import com.kolis.test_catalog_app.App
+import com.kolis.test_catalog_app.data.dress.DressRepositoryType
 import com.kolis.test_catalog_app.databinding.FragmentHomeBinding
 import com.kolis.test_catalog_app.extensions.postLastValue
-import com.kolis.test_catalog_app.ui.cart.CartViewModelFactory
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 class HomeFragment : Fragment() {
 
@@ -23,12 +24,18 @@ class HomeFragment : Fragment() {
     private val binding: FragmentHomeBinding
         get() = _binding!!
 
-    private val repository = DressRepository(MainActivity.appContext!!)
+    @Inject
+    lateinit var repository: DressRepositoryType
 
     private val homeViewModel: HomeViewModel by viewModels {
         HomeViewModelFactory(repository)
     }
     private lateinit var adapter: DressPagerAdapter
+
+    override fun onAttach(context: Context) {
+        (requireActivity().application as App).appComponent.inject(this)
+        super.onAttach(context)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
