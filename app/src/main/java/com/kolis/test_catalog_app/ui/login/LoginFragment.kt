@@ -18,6 +18,7 @@ import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.PhoneAuthProvider
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.kolis.test_catalog_app.Constants
 import com.kolis.test_catalog_app.MainActivity
 import com.kolis.test_catalog_app.R
@@ -112,6 +113,7 @@ class LoginFragment : Fragment() {
             }
             Activity.RESULT_CANCELED -> {
                 Toast.makeText(requireContext(), "Registration canceled..", Toast.LENGTH_LONG).show()
+                FirebaseCrashlytics.getInstance().log("Registration fail with error ${result.idpResponse?.error}")
             }
             else -> {
                 Toast.makeText(requireContext(), "Strange result code: ${result?.resultCode}", Toast.LENGTH_LONG).show()
